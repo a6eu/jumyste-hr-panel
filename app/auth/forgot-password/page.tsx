@@ -9,7 +9,7 @@ import ResetPasswordForm from '@/components/forgot-password/new-password-form'
 import { cn } from '@/lib/twmerge'
 
 const ForgotPassword: NextPage = () => {
-    const [step, setStep] = useState<'email' | 'code' | 'reset'>('reset')
+    const [step, setStep] = useState<'email' | 'code' | 'reset'>('email')
 
     return (
         <div
@@ -29,7 +29,10 @@ const ForgotPassword: NextPage = () => {
             <div className="w-full max-w-md flex justify-center">
                 <div className="flex flex-col flex-1 self-center">
                     <Image
-                        className={cn('self-center', step === 'code' && 'hidden')}
+                        className={cn(
+                            'self-center',
+                            step === 'code' && 'hidden'
+                        )}
                         src={Logo}
                         alt="Logo"
                     />

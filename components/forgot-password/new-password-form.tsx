@@ -13,7 +13,7 @@ const ResetPasswordForm = () => {
         initialValues: { password: '', confirmPassword: '' },
         validationSchema: Yup.object({
             password: Yup.string()
-                .min(6, 'Минимум 6 символов')
+                .min(8, 'Минимум 8 символов')
                 .required('Обязательное поле'),
             confirmPassword: Yup.string()
                 .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
@@ -30,10 +30,7 @@ const ResetPasswordForm = () => {
             <p>
                 Придумайте новый пароль и введите его дважды для подтверждения
             </p>
-            <form
-                className="flex flex-col mt-8"
-                onSubmit={formik.handleSubmit}
-            >
+            <form className="flex flex-col mt-8" onSubmit={formik.handleSubmit}>
                 <div className="relative">
                     <input
                         className="h-12 rounded-xl border border-gray-400 px-4 w-full"
@@ -62,7 +59,7 @@ const ResetPasswordForm = () => {
                     )}
                 </div>
 
-                <div className='mt-4'>
+                <div className="mt-4">
                     <input
                         className="h-12 rounded-xl border border-gray-400 px-4 w-full"
                         type="password"
@@ -72,6 +69,12 @@ const ResetPasswordForm = () => {
                         onBlur={formik.handleBlur}
                         value={formik.values.confirmPassword}
                     />
+                    {formik.touched.confirmPassword &&
+                        formik.errors.confirmPassword && (
+                            <p className="text-white bg-red-500 px-5 py-2 mt-2 rounded-md text-sm w-max">
+                                {formik.errors.confirmPassword}
+                            </p>
+                        )}
                 </div>
 
                 <button
