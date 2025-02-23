@@ -99,15 +99,21 @@ const SignIn = () => {
                     )}
                 </div>
 
-                <span className="text-primary self-end">Забыли пароль?</span>
+                <Link
+                    href="/auth/forgot-password"
+                    className="text-primary self-end cursor-pointer"
+                >
+                    Забыли пароль?
+                </Link>
                 <button
                     type="submit"
-                    className={cn("rounded-xl text-white h-12",
-                        !loading ? "bg-button" : "bg-button/50"
+                    className={cn(
+                        'rounded-xl text-white h-12',
+                        !loading ? 'bg-button' : 'bg-button/50'
                     )}
                     disabled={loading}
                 >
-                    {!loading ? "Войти" : "Подождите..."}
+                    {!loading ? 'Войти' : 'Подождите...'}
                 </button>
 
                 <span className="self-center">

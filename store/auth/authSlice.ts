@@ -28,15 +28,19 @@ const initialState: InitialState = {
 
 export const signIn = createAsyncThunk(
     'auth/signIn',
-    async (credentials: { email: string; password: string }, { rejectWithValue }) => {
+    async (
+        credentials: { email: string; password: string },
+        { rejectWithValue }
+    ) => {
         try {
             const response = await $api.post('/api/auth/login', credentials)
             localStorage.setItem('access_token', response.data.token)
-            // localStorage.setItem('refresh_token', response.data.refreshToken)
             return response.data
         } catch (error) {
             if (isAxiosError(error)) {
-                return rejectWithValue(error.response?.data?.error?.toString() || 'Login failed')
+                return rejectWithValue(
+                    error.response?.data?.error?.toString() || 'Login failed'
+                )
             }
             return rejectWithValue('An unexpected error occurred')
         }
@@ -46,7 +50,12 @@ export const signIn = createAsyncThunk(
 export const signUp = createAsyncThunk(
     'auth/signUp',
     async (
-        userData: { email: string; first_name: string; last_name: string; password: string },
+        userData: {
+            email: string
+            first_name: string
+            last_name: string
+            password: string
+        },
         { rejectWithValue }
     ) => {
         try {
@@ -54,7 +63,10 @@ export const signUp = createAsyncThunk(
             return 'Successfully registered'
         } catch (error) {
             if (isAxiosError(error)) {
-                return rejectWithValue(error.response?.data?.error?.toString() || 'Registration failed')
+                return rejectWithValue(
+                    error.response?.data?.error?.toString() ||
+                        'Registration failed'
+                )
             }
             return rejectWithValue('An unexpected error occurred')
         }
@@ -69,7 +81,10 @@ export const getUser = createAsyncThunk(
             return response.data
         } catch (error) {
             if (isAxiosError(error)) {
-                return rejectWithValue(error.response?.data?.error?.toString() || 'Failed to fetch user')
+                return rejectWithValue(
+                    error.response?.data?.error?.toString() ||
+                        'Failed to fetch user'
+                )
             }
             return rejectWithValue('An unexpected error occurred')
         }
@@ -91,7 +106,6 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // Sign In
             .addCase(signIn.pending, (state) => {
                 state.loading = true
                 state.error = null
@@ -101,13 +115,12 @@ const authSlice = createSlice({
                 state.accessToken = action.payload.accessToken
                 state.refreshToken = action.payload.refreshToken
                 state.user = action.payload.user
-                window.location.href = "/"
+                window.location.href = '/'
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.loading = false
                 state.error = action.payload as string
             })
-            // Sign Up
             .addCase(signUp.pending, (state) => {
                 state.loading = true
                 state.error = null
@@ -119,7 +132,6 @@ const authSlice = createSlice({
                 state.loading = false
                 state.error = action.payload as string
             })
-            // Fetch User
             .addCase(getUser.pending, (state) => {
                 state.loading = true
                 state.error = null
@@ -132,7 +144,7 @@ const authSlice = createSlice({
                 state.loading = false
                 state.error = action.payload as string
             })
-    }
+    },
 })
 
 export const { logout } = authSlice.actions

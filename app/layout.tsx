@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
     return (
         <html>
-            <body className="font-sans antialiased">
+            <body className="font-gilroy antialiased">
                 <ClientLayout>{children}</ClientLayout>
             </body>
         </html>
