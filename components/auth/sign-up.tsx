@@ -11,11 +11,14 @@ import { useSelector } from 'react-redux'
 import { signUp } from '@/store/auth/authSlice'
 import { useState } from 'react'
 import { cn } from '@/lib/twmerge'
+import { useTranslation } from 'react-i18next'
 
 const SignUp = () => {
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const { loading, error } = useSelector((state: RootState) => state.auth)
+    const { loading } = useSelector((state: RootState) => state.auth)
     const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const formik = useFormik({
         initialValues: {
@@ -26,49 +29,40 @@ const SignUp = () => {
             confirmPassword: '',
         },
         validationSchema: Yup.object({
-            firstName: Yup.string().required('Обязательное поле'),
-            lastName: Yup.string().required('Обязательное поле'),
+            firstName: Yup.string().required(t('errors.required')),
+            lastName: Yup.string().required(t('errors.required')),
             email: Yup.string()
-                .email('Проверьте правильность ввода email')
-                .required('Обязательное поле'),
+                .email(t('errors.emailInvalid'))
+                .required(t('errors.required')),
             password: Yup.string()
-                .min(6, 'Минимум 6 символов')
-                .required('Обязательное поле'),
+                .min(6, t('errors.passwordMin'))
+                .required(t('errors.required')),
             confirmPassword: Yup.string()
-                .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
-                .min(6, 'Минимум 6 символов')
-                .required('Обязательное поле'),
+                .oneOf([Yup.ref('password')], t('errors.passwordMismatch'))
+                .min(6, t('errors.passwordMin'))
+                .required(t('errors.required')),
         }),
         onSubmit: (values) => {
-            console.log('Submitting:', values)
-
             const userData = {
                 first_name: values.firstName,
                 last_name: values.lastName,
                 email: values.email,
                 password: values.password,
             }
-
             dispatch(signUp(userData))
-
-            if (error) {
-                console.error(error)
-            }
         },
     })
 
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
-
     return (
         <div className="flex flex-col flex-1 self-center">
-            <Image className="self-center" src={Logo} alt="Logo" />
-            <h1 className="text-3xl mt-20">Закройте вакансии быстрее!</h1>
-            <p>
-                Регистрируйтесь и находите лучших кандидатов за считанные
-                минуты.
-            </p>
+            <Image
+                className="self-center"
+                priority={true}
+                src={Logo}
+                alt="Logo"
+            />
+            <h1 className="text-3xl mt-20">{t('register.welcome')}</h1>
+            <p>{t('register.description')}</p>
             <form
                 className="flex flex-col space-y-4 mt-8"
                 onSubmit={formik.handleSubmit}
@@ -79,7 +73,7 @@ const SignUp = () => {
                             className="min-h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                             type="text"
                             name="firstName"
-                            placeholder="Имя"
+                            placeholder={t('register.name')}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.firstName}
@@ -91,13 +85,12 @@ const SignUp = () => {
                                 </p>
                             )}
                     </div>
-
                     <div className="flex-1">
                         <input
-                            className="min-h-12 rounded-xl border border-[#9F9F9F] px-4 flex-1 w-full"
+                            className="min-h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                             type="text"
                             name="lastName"
-                            placeholder="Фамилия"
+                            placeholder={t('register.surname')}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.lastName}
@@ -109,13 +102,13 @@ const SignUp = () => {
                         )}
                     </div>
                 </div>
-
                 <div>
                     <input
                         className="h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                         type="text"
                         name="email"
-                        placeholder="Логин или Email"
+                        placeholder="Email"
+                        autoComplete="username"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
@@ -126,28 +119,25 @@ const SignUp = () => {
                         </p>
                     )}
                 </div>
-
                 <div className="relative">
                     <input
                         className="h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                         type={!showPassword ? 'password' : 'text'}
                         name="password"
-                        placeholder="Пароль"
+                        autoComplete="new-password"
+                        placeholder={t('register.password')}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.password}
                     />
-
-                    {!showPassword ? (
-                        <Eye
-                            onClick={handleShowPassword}
-                            color="#616161"
+                    {showPassword ? (
+                        <EyeOff
+                            onClick={() => setShowPassword(false)}
                             className="absolute right-3 top-3 cursor-pointer"
                         />
                     ) : (
-                        <EyeOff
-                            onClick={handleShowPassword}
-                            color="#616161"
+                        <Eye
+                            onClick={() => setShowPassword(true)}
                             className="absolute right-3 top-3 cursor-pointer"
                         />
                     )}
@@ -157,17 +147,28 @@ const SignUp = () => {
                         </p>
                     )}
                 </div>
-
-                <div>
+                <div className="relative">
                     <input
                         className="h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
-                        type={!showPassword ? 'password' : 'text'}
+                        type={!showConfirmPassword ? 'password' : 'text'}
                         name="confirmPassword"
-                        placeholder="Подтвердите пароль"
+                        autoComplete="new-password"
+                        placeholder={t('register.confirmPassword')}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.confirmPassword}
                     />
+                    {showConfirmPassword ? (
+                        <EyeOff
+                            onClick={() => setShowConfirmPassword(false)}
+                            className="absolute right-3 top-3 cursor-pointer"
+                        />
+                    ) : (
+                        <Eye
+                            onClick={() => setShowConfirmPassword(true)}
+                            className="absolute right-3 top-3 cursor-pointer"
+                        />
+                    )}
                     {formik.touched.confirmPassword &&
                         formik.errors.confirmPassword && (
                             <p className="text-white bg-red-500 px-5 py-2 mt-2 rounded-md text-sm w-max">
@@ -183,13 +184,12 @@ const SignUp = () => {
                     )}
                     disabled={loading}
                 >
-                    {!loading ? 'Зарегистрироваться' : 'Подождите...'}
+                    {!loading ? t('register.button') : t('loading')}
                 </button>
-
                 <span className="self-center">
-                    Уже есть аккаунт?
+                    {t('register.haveAccount')}
                     <Link href="/auth?reg=true" className="text-primary ml-3">
-                        Войти
+                        {t('register.login')}
                     </Link>
                 </span>
             </form>

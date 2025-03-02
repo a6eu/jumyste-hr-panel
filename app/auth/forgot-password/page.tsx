@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
@@ -10,6 +11,8 @@ import { cn } from '@/lib/twmerge'
 
 const ForgotPassword: NextPage = () => {
     const [step, setStep] = useState<'email' | 'code' | 'reset'>('email')
+    const [verificationCode, setVerificationCode] = useState('')
+    const [email, setEmail] = useState('')
 
     return (
         <div
@@ -37,12 +40,24 @@ const ForgotPassword: NextPage = () => {
                         alt="Logo"
                     />
                     {step === 'email' && (
-                        <EmailForm onNext={() => setStep('code')} />
+                        <EmailForm
+                            onNext={(email) => {
+                                setStep('code')
+                                setEmail(email)
+                            }}
+                        />
                     )}
                     {step === 'code' && (
-                        <CodeVerificationForm onNext={() => setStep('reset')} />
+                        <CodeVerificationForm
+                            onNext={(code) => {
+                                setStep('reset')
+                                setVerificationCode(code)
+                            }}
+                        />
                     )}
-                    {step === 'reset' && <ResetPasswordForm />}
+                    {step === 'reset' && (
+                        <ResetPasswordForm code={verificationCode} email={email} />
+                    )}
                 </div>
             </div>
         </div>

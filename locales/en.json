@@ -1,0 +1,30 @@
+{
+    "login": {
+        "welcome": "Welcome back!",
+        "description": "Log in",
+        "email": "Email",
+        "password": "Password",
+        "forgotPassword": "Forgot password?",
+        "button": "Log in",
+        "noAccount": "New here?",
+        "register": "Sign Up!"
+    },
+    "errors": {
+        "emailInvalid": "Invalid email",
+        "required": "Required field",
+        "passwordMin": "At least 6 symbols",
+        "passwordMismatch": "Passwords must match"
+    },
+    "loading": "Wait...",
+    "register": {
+        "welcome": "Close vacancies faster!",
+        "description": "Register and find best candidates!",
+        "name": "Name",
+        "surname": "Surname",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "button": "Sign up",
+        "haveAccount": "Already have an account?",
+        "login": "Log in!"
+    }
+}

@@ -1,7 +1,9 @@
+import $api from '@/http/setup'
+import { isAxiosError } from 'axios'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-const EmailForm = ({ onNext }: { onNext: () => void }) => {
+const EmailForm = ({ onNext }: { onNext: (email: string) => void }) => {
     const formik = useFormik({
         initialValues: { email: '' },
         validationSchema: Yup.object({
@@ -9,7 +11,16 @@ const EmailForm = ({ onNext }: { onNext: () => void }) => {
                 .email('Некорректный email')
                 .required('Обязательное поле'),
         }),
-        onSubmit: () => onNext(),
+        onSubmit: (values) => {
+            try {
+                $api.post('/api/auth/forgot-password', { email: values.email })
+                onNext(values.email)
+            } catch (error) {
+                if (isAxiosError(error)) {
+                    console.error(error)
+                }
+            }
+        },
     })
 
     return (

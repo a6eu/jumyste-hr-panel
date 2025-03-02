@@ -1,0 +1,30 @@
+{
+    "login": {
+        "welcome": "Қош келдіңіз!",
+        "description": "Жүйеге кіру",
+        "email": "Электрондық пошта",
+        "password": "Құпия сөз",
+        "forgotPassword": "Құпия сөзді ұмыттыңыз ба?",
+        "button": "Кіру",
+        "noAccount": "Жаңа пайдаланушысыз ба?",
+        "register": "Тіркелу!"
+    },
+    "errors": {
+        "emailInvalid": "Жарамсыз email",
+        "required": "Міндетті өріс",
+        "passwordMin": "Кемінде 6 таңба",
+        "passwordMismatch": "Құпия сөздер сәйкес келуі керек"
+    },
+    "loading": "Күте тұрыңыз...",
+    "register": {
+        "welcome": "Бос орындарды тезірек жабыңыз!",
+        "description": "Тіркеліп, ең жақсы үміткерлерді табыңыз!",
+        "name": "Аты",
+        "surname": "Тегі",
+        "password": "Құпия сөз",
+        "confirmPassword": "Құпия сөзді растаңыз",
+        "button": "Тіркелу",
+        "haveAccount": "Аккаунтыңыз бар ма?",
+        "login": "Кіру!"
+    }
+}

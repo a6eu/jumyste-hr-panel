@@ -1,6 +1,7 @@
-export interface User {
-    email: string,
-    first_name: string,
-    last_name: string,
-    profile_picture: string | null,
+export interface IUser {
+    email: string
+    first_name: string
+    last_name: string
+    phone: string
+    profile_picture?: string 
 }

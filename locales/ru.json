@@ -1,0 +1,30 @@
+{
+    "login": {
+        "welcome": "С возвращением!",
+        "description": "Войдите в систему",
+        "email": "Электронная почта",
+        "password": "Пароль",
+        "forgotPassword": "Забыли пароль?",
+        "button": "Войти",
+        "noAccount": "Вы здесь впервые?",
+        "register": "Зарегистрироваться!"
+    },
+    "errors": {
+        "emailInvalid": "Некорректный email",
+        "required": "Обязательное поле",
+        "passwordMin": "Минимум 6 символов",
+        "passwordMismatch": "Пароли должны совпадать"
+    },
+    "loading": "Ожидайте...",
+    "register": {
+        "welcome": "Закрывайте вакансии быстрее!",
+        "description": "Регистрируйтесь и находите лучших кандидатов!",
+        "name": "Имя",
+        "surname": "Фамилия",
+        "password": "Пароль",
+        "confirmPassword": "Подтвердите пароль",
+        "button": "Зарегистрироваться",
+        "haveAccount": "Уже есть аккаунт?",
+        "login": "Войти!"
+    }
+}

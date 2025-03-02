@@ -1,7 +1,11 @@
 'use client'
 import { useState } from 'react'
 
-const CodeVerificationForm = ({ onNext }: { onNext: () => void }) => {
+const CodeVerificationForm = ({
+    onNext,
+}: {
+    onNext: (code: string) => void
+}) => {
     const [code, setCode] = useState(['', '', '', ''])
 
     const handleChange = (index: number, value: string) => {
@@ -16,7 +20,7 @@ const CodeVerificationForm = ({ onNext }: { onNext: () => void }) => {
 
             if (newCode.every((num) => num !== '')) {
                 console.log('User entered code:', newCode.join(''))
-                onNext()
+                onNext(newCode.join(''))
             }
         }
     }

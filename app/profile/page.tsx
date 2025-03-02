@@ -1,20 +1,27 @@
 'use client'
 
-import { getUser } from '@/store/auth/authSlice'
+import UserHeader from '@/components/profile/user-header'
+import UserInfo from '@/components/profile/user-info'
+import HiringInfo from '@/components/profile/hiring-info'
+import HiringFunnel from '@/components/profile/hiring-funnel'
 import { RootState, useAppDispatch } from '@/store/store'
-import { Linkedin, Mail, Phone } from 'lucide-react'
+import { getUser } from '@/store/auth/authSlice'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { cn } from '@/lib/twmerge'
 
 const ProfilePage = () => {
     const dispatch = useAppDispatch()
     const { user, error, loading } = useSelector(
         (state: RootState) => state.auth
     )
+    const { isOpen } = useSelector((state: RootState) => state.sidebar)
 
     useEffect(() => {
         dispatch(getUser())
-    }, [dispatch])
+    }, [])
+
+    console.log(user)
 
     if (loading) {
         return <div>Loading...</div>
@@ -25,90 +32,36 @@ const ProfilePage = () => {
     }
 
     return (
-        <div>
-            <div className="flex items-center gap-7">
-                <div className="size-52 bg-secondaryLight rounded-full"></div>
-                <div>
-                    <h2 className="font-semibold text-2xl mb-7">
-                        HR Manager Profile
-                    </h2>
-                    <div className="flex items-center gap-4">
-                        <div className="bg-primary size-[72px] rounded-lg"></div>
-                        <div>
-                            <span className="text-xl">
-                                АО &quot;Халык Банк&quot;
-                            </span>
-                            <p className="text-black/50">250 сотрудников</p>
+        user && (
+            <div
+                className={cn(
+                    'w-full py-8 px-4 flex gap-8 flex-col justify-between items-stretch',
+                    isOpen
+                        ? 'lg:pr-[78px] pl-4 flex-col'
+                        : 'lg:px-[78px] lg:flex-row'
+                )}
+            >
+                <div className="flex w-full flex-[70%] gap-5 lg:gap-9">
+                    <div className="flex flex-col w-full items-center lg:items-start">
+                        <UserHeader />
+                        <div
+                            className={cn(
+                                'flex flex-col md:gap-8 items-start px-4 lg:px-0',
+                                isOpen ? 'lg:flex-row' : 'lg:flex-row'
+                            )}
+                        >
+                            <UserInfo user={user} />
+                            <div className="flex flex-col gap-7 w-full">
+                                <HiringInfo />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="py-6 px-4 border-[#9F9F9F] border-[1px] rounded-2xl flex flex-col w-[340px] mt-8">
-                <h2 className="self-center mb-2.5 font-medium text-2xl">
-                    Общие сведения
-                </h2>
-                <div className="space-y-2 flex flex-col">
-                    <div>
-                        <span className="text-primary font-semibold">ФИО:</span>{' '}
-                        <span>{user?.first_name + ' ' + user?.last_name}</span>
-                    </div>
-                    <div>
-                        <span className="text-primary font-semibold">
-                            Должность:
-                        </span>{' '}
-                        <span>HR Manager</span>
-                    </div>
-                    <div>
-                        <span className="text-primary font-semibold">
-                            Контактные данные:
-                        </span>
-                        <div className="*:flex *:items-center *:gap-2 space-y-2">
-                            <p>
-                                <Mail color="#A3A2A2" />
-                                {user?.email}
-                            </p>
-                            <p>
-                                <Phone color="#A3A2A2" /> +7 777 77 77
-                            </p>
-                            <p className="underline">
-                                <Linkedin color="#A3A2A2" /> linkedin.com
-                            </p>
-                        </div>
-                    </div>
-                    <div className="w-[90%] bg-[#9F9F9F] h-[1px] self-center" />
-                    <div className="mt-2 space-y-2">
-                        <div className="flex items-start text-sm gap-1">
-                            <div className="bg-primary size-4 rounded-md shrink-0 inline-block"></div>
-                            <p className="-mt-[2px]">
-                                {' '}
-                                Среднее время закрытии вакансии 25 дней
-                            </p>
-                        </div>
-                        <div className="flex items-start text-sm gap-1">
-                            <div className="bg-primary size-4 rounded-md shrink-0 inline-block"></div>
-                            <p className="-mt-[2px]">
-                                {' '}
-                                Среднее время закрытии вакансии 25 дней
-                            </p>
-                        </div>
-                        <div className="flex items-start text-sm gap-1">
-                            <div className="bg-primary size-4 rounded-md shrink-0 inline-block"></div>
-                            <p className="-mt-[2px]">
-                                {' '}
-                                Среднее время закрытии вакансии 25 дней
-                            </p>
-                        </div>
-                        <div className="flex items-start text-sm gap-1">
-                            <div className="bg-primary size-4 rounded-md shrink-0 inline-block"></div>
-                            <p className="-mt-[2px]">
-                                {' '}
-                                Среднее время закрытии вакансии 25 дней
-                            </p>
-                        </div>
-                    </div>
+                <div className="px-4 lg:px-0 w-full flex-[30%]">
+                    <HiringFunnel />
                 </div>
             </div>
-        </div>
+        )
     )
 }
 

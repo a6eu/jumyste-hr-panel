@@ -12,8 +12,10 @@ import { RootState } from '@/store/store'
 import { signIn } from '@/store/auth/authSlice'
 import { useState } from 'react'
 import { cn } from '@/lib/twmerge'
+import { useTranslation } from 'react-i18next'
 
 const SignIn = () => {
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const { loading } = useSelector((state: RootState) => state.auth)
     const [showPassword, setShowPassword] = useState(false)
@@ -25,28 +27,29 @@ const SignIn = () => {
         },
         validationSchema: Yup.object({
             email: Yup.string()
-                .email('Некорректный email')
-                .required('Обязательное поле'),
+                .email(t('errors.emailInvalid'))
+                .required(t('errors.required')),
             password: Yup.string()
-                .min(6, 'Минимум 6 символов')
-                .required('Обязательное поле'),
+                .min(6, t('errors.passwordMin'))
+                .required(t('errors.required')),
         }),
-        onSubmit: (values) => {
-            console.log('Submitting:', values)
-
-            dispatch(signIn(values))
+        onSubmit: async (values) => {
+            await dispatch(signIn(values))
         },
     })
 
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
+    const handleShowPassword = () => setShowPassword(!showPassword)
 
     return (
         <div className="flex flex-col flex-1 self-center">
-            <Image className="self-center" src={Logo} alt="Logo" />
-            <h1 className="text-2xl mt-20">С возвращением!</h1>
-            <p>Войдите в свой аккаунт.</p>
+            <Image
+                className="self-center"
+                priority={true}
+                src={Logo}
+                alt="Logo"
+            />
+            <h1 className="text-2xl mt-20">{t('login.welcome')}</h1>
+            <p>{t('login.description')}</p>
             <form
                 className="flex flex-col space-y-4 mt-8"
                 onSubmit={formik.handleSubmit}
@@ -56,7 +59,8 @@ const SignIn = () => {
                         className="h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                         type="text"
                         name="email"
-                        placeholder="Логин или Email"
+                        autoComplete="email"
+                        placeholder={t('login.email')}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.email}
@@ -73,7 +77,8 @@ const SignIn = () => {
                         className="h-12 rounded-xl border border-[#9F9F9F] px-4 w-full"
                         type={!showPassword ? 'password' : 'text'}
                         name="password"
-                        placeholder="Пароль"
+                        autoComplete="current-password"
+                        placeholder={t('login.password')}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.password}
@@ -103,8 +108,9 @@ const SignIn = () => {
                     href="/auth/forgot-password"
                     className="text-primary self-end cursor-pointer"
                 >
-                    Забыли пароль?
+                    {t('login.forgotPassword')}
                 </Link>
+
                 <button
                     type="submit"
                     className={cn(
@@ -113,13 +119,13 @@ const SignIn = () => {
                     )}
                     disabled={loading}
                 >
-                    {!loading ? 'Войти' : 'Подождите...'}
+                    {!loading ? t('login.button') : t('loading')}
                 </button>
 
                 <span className="self-center">
-                    Нет аккаунта?
+                    {t('login.noAccount')}
                     <Link href="/auth?reg=false" className="text-primary ml-3">
-                        Зарегистрируйтесь
+                        {t('login.register')}
                     </Link>
                 </span>
             </form>

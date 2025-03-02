@@ -1,12 +1,9 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'http://192.168.1.2:8081'
+const API_BASE_URL = 'https://jumyste-app-backend-production.up.railway.app'
 
 const $api = axios.create({
     baseURL: API_BASE_URL,
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-    },
 })
 
 let isRefreshing = false
@@ -23,7 +20,10 @@ const onRefreshed = (token: string) => {
 
 $api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access_token')
+        const token =
+            typeof window !== 'undefined'
+                ? localStorage.getItem('access_token')
+                : null
         if (token) {
             config.headers.Authorization = `Bearer ${token}`
         }

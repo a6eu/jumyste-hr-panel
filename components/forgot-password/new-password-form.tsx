@@ -1,11 +1,18 @@
 'use client'
 
+import $api from '@/http/setup'
 import { useFormik } from 'formik'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import * as Yup from 'yup'
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm = ({
+    code,
+    email,
+}: {
+    code: string
+    email: string
+}) => {
     const [showPassword, setShowPassword] = useState(false)
     const toggleShowPassword = () => setShowPassword(!showPassword)
 
@@ -20,7 +27,15 @@ const ResetPasswordForm = () => {
                 .required('Обязательное поле'),
         }),
         onSubmit: (values) => {
-            console.log('New Password:', values.password)
+            $api.post('/api/auth/reset-password', {
+                email: email,
+                reset_code: code,
+                new_password: values.password,
+                confirm_password: values.confirmPassword,
+            }).then((r) => {
+                console.log(r.data)
+                window.location.href = '/auth?reg=true'
+            })
         },
     })
 
