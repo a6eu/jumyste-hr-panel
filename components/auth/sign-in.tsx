@@ -10,15 +10,18 @@ import { useAppDispatch } from '@/store/store'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { signIn } from '@/store/auth/authSlice'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cn } from '@/lib/twmerge'
 import { useTranslation } from 'react-i18next'
+import { useToast } from '@/hooks/use-toast'
+
 
 const SignIn = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const { loading } = useSelector((state: RootState) => state.auth)
+    const { loading, error } = useSelector((state: RootState) => state.auth)
     const [showPassword, setShowPassword] = useState(false)
+    const {showToast} = useToast()
 
     const formik = useFormik({
         initialValues: {
@@ -37,6 +40,12 @@ const SignIn = () => {
             await dispatch(signIn(values))
         },
     })
+
+    useEffect(() => {
+        if (error) {
+            showToast('error', "Error!")
+        }
+    }, [error])
 
     const handleShowPassword = () => setShowPassword(!showPassword)
 

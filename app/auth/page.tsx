@@ -1,4 +1,5 @@
 'use client'
+
 import SignIn from '@/components/auth/sign-in'
 import SignUp from '@/components/auth/sign-up'
 import LanguageSwitcher from '@/components/language-switcher'
@@ -10,7 +11,7 @@ const AuthPage = () => {
 
     return (
         <>
-            <div className='flex justify-end pt-10 pr-10'>
+            <div className="flex justify-end pt-10 pr-10">
                 <LanguageSwitcher />
             </div>
             <div className="flex justify-center lg:flex-row lg:justify-between items-center h-screen px-8 md:px-40 py-16 gap-10 md:gap-24">

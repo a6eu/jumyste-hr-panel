@@ -5,22 +5,23 @@ import { store } from '@/store/store'
 import { Sidebar } from '@/components/sidebar'
 import { Provider } from 'react-redux'
 import { usePathname } from 'next/navigation'
+import { ModalProvider } from '@/hooks/use-modal'
+import { ToastProvider } from '@/hooks/use-toast'
 
-export const ClientLayout = ({
-    children,
-}: Readonly<{
-    children: React.ReactNode
-}>) => {
+export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname()
+
     return (
         <Provider store={store}>
-            <div className="flex w-full">
-                <Sidebar />
-                <div className="w-full">
-                    {!pathname.includes('/auth') && <Header />}
-                    {children}
+            <ModalProvider>
+                <div className="flex w-full">
+                    <Sidebar />
+                    <div className="w-full relative">
+                        {!pathname.includes('/auth') && <Header />}
+                        <ToastProvider>{children}</ToastProvider>
+                    </div>
                 </div>
-            </div>
+            </ModalProvider>
         </Provider>
     )
 }

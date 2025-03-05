@@ -105,6 +105,7 @@ export const Departments = () => {
     ])
     const [newDepartment, setNewDepartment] = useState('')
     const [selectedColor, setSelectedColor] = useState(colorOptions[0].value)
+    const [showDropdown, setShowDropdown] = useState(false)
     const [isAdding, setIsAdding] = useState(false)
     const addMenuRef = useRef<HTMLDivElement>(null)
 
@@ -137,6 +138,7 @@ export const Departments = () => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setIsAdding(false)
+                setShowDropdown(false)
             }
         }
 
@@ -147,6 +149,11 @@ export const Departments = () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
     }, [isAdding])
+
+    const handleSelectColor = (color: string) => {
+        setSelectedColor(color)
+        setShowDropdown(false)
+    }
 
     return (
         <div className="max-w-sm">
@@ -163,28 +170,41 @@ export const Departments = () => {
             </div>
 
             {isAdding && (
-                <div
-                    ref={addMenuRef}
-                    className="mt-4 p-3 border rounded-md bg-gray-50 relative"
-                >
-                    <input
-                        type="text"
-                        placeholder="Название отдела"
-                        className="w-full p-2 border rounded-md focus:outline-none"
-                        value={newDepartment}
-                        onChange={(e) => setNewDepartment(e.target.value)}
-                    />
-                    <select
-                        className="w-full mt-2 p-2 border rounded-md"
-                        value={selectedColor}
-                        onChange={(e) => setSelectedColor(e.target.value)}
-                    >
-                        {colorOptions.map((color) => (
-                            <option key={color.value} value={color.value}>
-                                {color.name}
-                            </option>
-                        ))}
-                    </select>
+                <div ref={addMenuRef} className="mt-4 p-3 relative">
+                    <div className="flex items-center gap-2">
+                        <div
+                            onClick={() => setShowDropdown(!showDropdown)}
+                            className="border border-[#A3A2A2] rounded-md p-2.5 cursor-pointer"
+                        >
+                            <div
+                                style={{ backgroundColor: selectedColor }}
+                                className="size-5 rounded"
+                            />
+                        </div>
+                        {showDropdown && (
+                            <div className="border border-[#A3A2A2] rounded-b p-2.5 flex flex-col gap-2 absolute bg-white border-t-0 top-[48px]">
+                                {colorOptions.map((option, index) => (
+                                    <div
+                                        className="size-5 rounded cursor-pointer"
+                                        key={index}
+                                        style={{
+                                            backgroundColor: option.value,
+                                        }}
+                                        onClick={() =>
+                                            handleSelectColor(option.value)
+                                        }
+                                    />
+                                ))}
+                            </div>
+                        )}
+                        <input
+                            type="text"
+                            placeholder="Название отдела"
+                            className="w-full p-2 border rounded-md focus:outline-none"
+                            value={newDepartment}
+                            onChange={(e) => setNewDepartment(e.target.value)}
+                        />
+                    </div>
                     <button
                         className="w-full mt-2 p-2 bg-blue-500 text-white rounded-md"
                         onClick={addDepartment}

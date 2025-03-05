@@ -1,11 +1,13 @@
 'use client'
 
 import PageHeader from '@/components/page-header'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Slider from '@mui/material/Slider'
+import { useRouter } from 'next/navigation'
+import ModalDialog from '@/components/dialogs/modal-dialog'
 
 const validationSchema = Yup.object({
     jobTitle: Yup.string().required('Введите название вакансии'),
@@ -20,6 +22,9 @@ const validationSchema = Yup.object({
 
 const RecruitingPage = () => {
     const [hideSalary, setHideSalary] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [pendingRoute, setPendingRoute] = useState<string | null>(null)
+    const router = useRouter()
 
     const formik = useFormik({
         initialValues: {
@@ -35,15 +40,59 @@ const RecruitingPage = () => {
         validationSchema,
         onSubmit: (values) => {
             console.log('Form Data:', values)
-            alert('Форма отправлена!')
         },
     })
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            if (formik.dirty) {
+                event.preventDefault()
+                event.returnValue = '' 
+            }
+        }
+
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
+    }, [formik.dirty])
+
+    useEffect(() => {
+        const handleRouteChange = (url: string) => {
+            if (formik.dirty) {
+                setPendingRoute(url)
+                setIsModalOpen(true)
+                throw 'Route change aborted'
+            }
+        }
+
+        const originalPush = router.push
+        router.push = (url: string) => {
+            handleRouteChange(url)
+        }
+
+        return () => {
+            router.push = originalPush
+        }
+    }, [formik.dirty, router])
+
+    const handleLeave = () => {
+        setIsModalOpen(false)
+        if (pendingRoute) {
+            router.push(pendingRoute) 
+            setPendingRoute(null)
+        }
+    }
 
     return (
         <>
             <PageHeader />
             <div>
-                <form onSubmit={formik.handleSubmit} className="lg:px-24 px-4 pt-14">
+                <form
+                    onSubmit={formik.handleSubmit}
+                    className="lg:px-24 px-4 py-14"
+                >
                     <h2 className="text-xl mb-2">Название вакансии</h2>
                     <input
                         type="text"
@@ -147,7 +196,7 @@ const RecruitingPage = () => {
                     <div className="flex flex-col gap-2 mb-6 max-w-sm">
                         <div className="flex justify-between">
                             <input
-                                type="text"
+                                type="number"
                                 value={formik.values.salary[0]}
                                 onChange={(e) =>
                                     formik.setFieldValue('salary', [
@@ -158,7 +207,7 @@ const RecruitingPage = () => {
                                 className="border w-[111px] px-5"
                             />
                             <input
-                                type="text"
+                                type="number"
                                 value={formik.values.salary[1]}
                                 onChange={(e) =>
                                     formik.setFieldValue('salary', [
@@ -177,6 +226,7 @@ const RecruitingPage = () => {
                             valueLabelDisplay="auto"
                             min={0}
                             max={1000000}
+                            step={1000}
                             sx={{ color: '#8B5DFF' }}
                         />
                     </div>
@@ -257,6 +307,15 @@ const RecruitingPage = () => {
                     </button>
                 </form>
             </div>
+
+            {isModalOpen && (
+                <ModalDialog
+                    title="Уйти без сохранения?"
+                    description="Если уйдете, то изменения не сохранятся"
+                    onCancel={() => setIsModalOpen(false)}
+                    onConfirm={handleLeave}
+                />
+            )}
         </>
     )
 }

@@ -66,7 +66,9 @@ $api.interceptors.response.use(
             } catch (refreshError) {
                 localStorage.removeItem('access_token')
                 localStorage.removeItem('refresh_token')
-                window.location.href = '/auth'
+                 if (window.location.pathname !== '/auth') {
+                     window.location.href = '/auth?reg=true'
+                 }
                 return Promise.reject(refreshError)
             } finally {
                 isRefreshing = false
