@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { User, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch } from '@/store/store'
-import { updateProfile } from '@/store/auth/authSlice'
+import { useAppDispatch } from '@/redux/store'
+import { updateProfile } from '@/redux/auth/authSlice'
 
 const EditProfilePage = () => {
     const router = useRouter()
@@ -15,7 +15,6 @@ const EditProfilePage = () => {
         name: '',
         position: '',
         phone: '',
-
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,16 +23,18 @@ const EditProfilePage = () => {
     }
 
     const handleUpdateProfile = async () => {
-        await dispatch(updateProfile({
-            first_name: formData.name,
-        }))
+        await dispatch(
+            updateProfile({
+                first_name: formData.name,
+            })
+        )
     }
 
     return (
-        <>
+        <div className="relative">
             <div
-                onClick={() => router.back()}
-                className="absolute top-20 lg:top-24 left-4 lg:left-24 flex justify-center items-center border border-black rounded-full size-[50px] cursor-pointer"
+                onClick={() => router.replace('/profile')}
+                className=" absolute top-4 lg:top-6 left-5 lg:left-10 flex justify-center items-center border border-black rounded-full size-[50px] cursor-pointer"
             >
                 <ArrowLeft />
             </div>
@@ -146,7 +147,7 @@ const EditProfilePage = () => {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

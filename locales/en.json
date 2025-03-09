@@ -1,30 +1,62 @@
 {
     "login": {
         "welcome": "Welcome back!",
-        "description": "Log in",
+        "description": "Log in to the system",
         "email": "Email",
         "password": "Password",
         "forgotPassword": "Forgot password?",
         "button": "Log in",
-        "noAccount": "New here?",
-        "register": "Sign Up!"
+        "noAccount": "First time here?",
+        "register": "Register!",
+        "success": "Successfully logged in!"
+    },
+    "resetPassword": {
+        "title": "Reset password",
+        "description": "Enter your email address and we will send you a password reset code",
+        "email": "Email",
+        "button": "Send code",
+        "confirmCode": "Confirm code",
+        "codeDescription": "Enter the 4-digit code we sent you via email",
+        "resendButton": "Resend code",
+        "timer": "Will be able to resend in",
+        "confirmButton": "Confirm code",
+        "finalDescription": "Create a new password and enter it twice for confirmation"
     },
     "errors": {
         "emailInvalid": "Invalid email",
         "required": "Required field",
-        "passwordMin": "At least 6 symbols",
-        "passwordMismatch": "Passwords must match"
+        "passwordMin": "Minimum 6 characters",
+        "passwordMismatch": "Passwords must match",
+        "loadingError": "An error occurred while loading this page",
+        "unexpected": "An unexpected error occurred! Please try again later"
     },
-    "loading": "Wait...",
+    "loading": "Loading...",
     "register": {
         "welcome": "Close vacancies faster!",
-        "description": "Register and find best candidates!",
-        "name": "Name",
-        "surname": "Surname",
+        "description": "Register and find the best candidates!",
+        "name": "First name",
+        "surname": "Last name",
         "password": "Password",
         "confirmPassword": "Confirm password",
-        "button": "Sign up",
+        "button": "Register",
         "haveAccount": "Already have an account?",
+        "success": "Successfully registered!",
         "login": "Log in!"
+    },
+    "profile": {
+        "generalInfo": "General Information",
+        "fullName": "Full name",
+        "specialization": "Position",
+        "contacts": "Contact information",
+        "avgDays": "Average time to close a vacancy",
+        "totalEmployees": "Number of hired employees",
+        "employeesGrowth": "Candidate growth",
+        "differences": "Compared to last month",
+        "employeeGrowthDynamics": "Candidate growth dynamics",
+        "recruitmentFunnel": "Recruitment funnel",
+        "totalResumes": "Resumes received",
+        "passedPhoneScreening": "Passed phone screening",
+        "invitedToInterview": "Invited to interview",
+        "gotOffer": "Received offer"
     }
 }

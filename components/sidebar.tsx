@@ -1,26 +1,25 @@
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/twmerge'
-import { ClipboardList, UserPlus, CalendarDays, Plus, X } from 'lucide-react'
+import { CalendarDays, ClipboardList, Plus, UserPlus, X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { useAppSelector } from '@/store/store'
+import { useAppSelector } from '@/redux/store'
 
 export const Sidebar = () => {
-    const [active, setActive] = useState('board')
+    const [active, setActive] = useState('')
     const pathname = usePathname()
     const isOpen = useAppSelector((state) => state.sidebar.isOpen)
 
     useEffect(() => {
         if (pathname.includes('/recruiting')) setActive('recruiting')
         else if (pathname.includes('/schedule')) setActive('schedule')
-        else setActive('board')
     }, [pathname])
 
     return (
         <aside
             className={cn(
-                'w-full max-w-80 pt-20 bg-white border-r-2 shrink-0 px-8 duration-300',
+                `w-full max-w-80 pt-20 bg-white border-r-2 shrink-0 px-8 duration-300 min-h-screen z-50 fixed lg:static shadow-2xl lg:shadow`,
                 pathname.includes('auth') && 'hidden',
-                isOpen ? 'translate-x-0' : '-translate-x-full hidden'
+                isOpen ? 'translate-x-0' : '-translate-x-full hidden',
             )}
         >
             <div className="bg-[#D4D4D4] h-[3px] w-full" />
@@ -45,7 +44,7 @@ export const Sidebar = () => {
                                 'flex items-center gap-5 border-2 h-14 rounded-md pl-4 cursor-pointer',
                                 active === 'board'
                                     ? 'border-primaryBlocks bg-[#E1D5FF] text-primaryBlocks'
-                                    : 'bg-white text-black border-transparent'
+                                    : 'bg-white text-black border-transparent',
                             )}
                         >
                             <ClipboardList />
@@ -60,7 +59,7 @@ export const Sidebar = () => {
                                 'flex items-center gap-5 border-2 h-14 rounded-md pl-4 cursor-pointer',
                                 active === 'recruiting'
                                     ? 'border-primaryBlocks bg-[#E1D5FF] text-primaryBlocks'
-                                    : ' bg-white text-black border-transparent'
+                                    : ' bg-white text-black border-transparent',
                             )}
                         >
                             <UserPlus />
@@ -72,7 +71,7 @@ export const Sidebar = () => {
                                 'flex items-center gap-5 border-2 h-14 rounded-md pl-4 cursor-pointer',
                                 active === 'schedule'
                                     ? 'border-primaryBlocks bg-[#E1D5FF] text-primaryBlocks'
-                                    : 'bg-white text-black border-transparent'
+                                    : 'bg-white text-black border-transparent',
                             )}
                         >
                             <CalendarDays />
@@ -107,7 +106,7 @@ export const Departments = () => {
     const [selectedColor, setSelectedColor] = useState(colorOptions[0].value)
     const [showDropdown, setShowDropdown] = useState(false)
     const [isAdding, setIsAdding] = useState(false)
-    const addMenuRef = useRef<HTMLDivElement>(null)
+    const addMenuRef = useRef<HTMLFormElement | null>(null)
 
     const addDepartment = () => {
         if (!newDepartment.trim()) return
@@ -170,7 +169,7 @@ export const Departments = () => {
             </div>
 
             {isAdding && (
-                <div ref={addMenuRef} className="mt-4 p-3 relative">
+                <form ref={addMenuRef} className="mt-4 relative">
                     <div className="flex items-center gap-2">
                         <div
                             onClick={() => setShowDropdown(!showDropdown)}
@@ -182,7 +181,8 @@ export const Departments = () => {
                             />
                         </div>
                         {showDropdown && (
-                            <div className="border border-[#A3A2A2] rounded-b p-2.5 flex flex-col gap-2 absolute bg-white border-t-0 top-[48px]">
+                            <div
+                                className="border border-[#A3A2A2] rounded-b p-2.5 flex flex-col gap-2 absolute bg-white border-t-0 top-[35px] shadow-md">
                                 {colorOptions.map((option, index) => (
                                     <div
                                         className="size-5 rounded cursor-pointer"
@@ -206,12 +206,13 @@ export const Departments = () => {
                         />
                     </div>
                     <button
-                        className="w-full mt-2 p-2 bg-blue-500 text-white rounded-md"
+                        type="submit"
+                        className="w-full mt-2 p-2 bg-primaryBlocks text-white rounded-md"
                         onClick={addDepartment}
                     >
                         Добавить
                     </button>
-                </div>
+                </form>
             )}
 
             <div className="mt-4 space-y-3">

@@ -29,7 +29,7 @@ $api.interceptors.request.use(
         }
         return config
     },
-    (error) => Promise.reject(error)
+    (error) => Promise.reject(error),
 )
 
 $api.interceptors.response.use(
@@ -53,7 +53,7 @@ $api.interceptors.response.use(
                 const refreshToken = localStorage.getItem('refresh_token')
                 const response = await axios.post(
                     `${API_BASE_URL}/auth/refresh`,
-                    { refreshToken }
+                    { refreshToken },
                 )
 
                 const newAccessToken = response.data.accessToken
@@ -66,16 +66,16 @@ $api.interceptors.response.use(
             } catch (refreshError) {
                 localStorage.removeItem('access_token')
                 localStorage.removeItem('refresh_token')
-                 if (window.location.pathname !== '/auth') {
-                     window.location.href = '/auth?reg=true'
-                 }
+                if (window.location.pathname !== '/auth') {
+                    window.location.href = '/auth?reg=true'
+                }
                 return Promise.reject(refreshError)
             } finally {
                 isRefreshing = false
             }
         }
         return Promise.reject(error)
-    }
+    },
 )
 
 export default $api

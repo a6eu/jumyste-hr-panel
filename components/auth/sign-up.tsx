@@ -6,19 +6,24 @@ import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
 import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import { RootState, useAppDispatch } from '@/store/store'
+import { RootState, useAppDispatch } from '@/redux/store'
 import { useSelector } from 'react-redux'
-import { signUp } from '@/store/auth/authSlice'
-import { useState } from 'react'
+import { signUp } from '@/redux/auth/authSlice'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/twmerge'
 import { useTranslation } from 'react-i18next'
+import { useToast } from '@/hooks/use-toast'
 
 const SignUp = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const { loading } = useSelector((state: RootState) => state.auth)
+    const { loading, success, error } = useSelector(
+        (state: RootState) => state.auth
+    )
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const { showToast } = useToast()
+    const hasShownToast = useRef(false)
 
     const formik = useFormik({
         initialValues: {
@@ -52,6 +57,18 @@ const SignUp = () => {
             dispatch(signUp(userData))
         },
     })
+
+    useEffect(() => {
+        if (!hasShownToast.current) {
+            hasShownToast.current = true
+            return
+        }
+        if (error) {
+            showToast('error', 'Ошибка! Прошу попробовать еще раз, но позже!')
+        } else if (success) {
+            showToast('success', 'Успешно зарегистрированы!')
+        }
+    }, [error, success])
 
     return (
         <div className="flex flex-col flex-1 self-center">

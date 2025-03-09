@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 export default {
+    mode: 'jit',
     darkMode: ['class'],
     content: [
         './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,7 +13,7 @@ export default {
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
-                primary: '#93D9E',
+                primary: '#493D9E',
                 primaryLight: '#B2A5FF',
                 primaryBlocks: '#8B5DFF',
                 secondary: '#DAD2FF',

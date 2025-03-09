@@ -1,5 +1,6 @@
 'use client'
 
+import { useToast } from '@/hooks/use-toast'
 import $api from '@/http/setup'
 import { useFormik } from 'formik'
 import { Eye, EyeOff } from 'lucide-react'
@@ -15,6 +16,7 @@ const ResetPasswordForm = ({
 }) => {
     const [showPassword, setShowPassword] = useState(false)
     const toggleShowPassword = () => setShowPassword(!showPassword)
+    const { showToast } = useToast()
 
     const formik = useFormik({
         initialValues: { password: '', confirmPassword: '' },
@@ -32,10 +34,18 @@ const ResetPasswordForm = ({
                 reset_code: code,
                 new_password: values.password,
                 confirm_password: values.confirmPassword,
-            }).then((r) => {
-                console.log(r.data)
-                window.location.href = '/auth?reg=true'
             })
+                .then((r) => {
+                    console.log(r.data)
+                    showToast('success', 'Пароль был сброшен!')
+                    setTimeout(() => {
+                        window.location.href = '/auth?reg=true'
+                    }, 1000)
+                })
+                .catch((err) => {
+                    console.error(err.data)
+                    showToast('error', 'Ошибка! Попробуйте еще раз, но позже')
+                })
         },
     })
 

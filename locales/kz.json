@@ -1,30 +1,64 @@
 {
     "login": {
-        "welcome": "Қош келдіңіз!",
-        "description": "Жүйеге кіру",
+        "welcome": "Qaıta oralýyńyzben!",
+        "description": "Júıege kirińiz",
+        "email": "Elektrondy poshta",
+        "password": "Qupıa sóz",
+        "forgotPassword": "Qupıa sózdi umyttyńyz ba?",
+        "button": "Kirý",
+        "noAccount": "Munda alǵash ret pe?",
+        "register": "Tirkelý!",
+        "success": "Sátti tirkeldiń!"
+    },
+    "resetPassword": {
+        "title": "Құпиясөзді қалпына келтіру",
+        "description": "Электрондық поштаңызды енгізіңіз, біз сізге құпиясөзді қалпына келтіру кодын жібереміз",
         "email": "Электрондық пошта",
-        "password": "Құпия сөз",
-        "forgotPassword": "Құпия сөзді ұмыттыңыз ба?",
-        "button": "Кіру",
-        "noAccount": "Жаңа пайдаланушысыз ба?",
-        "register": "Тіркелу!"
+        "button": "Код жіберу",
+        "confirmCode": "Кодты растау",
+        "codeDescription": "Электрондық поштаңызға жіберілген 4 таңбалы кодты енгізіңіз",
+        "resendButton": "Кодты қайта жіберу",
+        "timer": "Қайта жіберу мүмкіндігі",
+        "confirmButton": "Кодты растау",
+        "finalDescription": "Жаңа құпиясөзді жасаңыз және оны растау үшін екі рет енгізіңіз"
     },
     "errors": {
-        "emailInvalid": "Жарамсыз email",
-        "required": "Міндетті өріс",
-        "passwordMin": "Кемінде 6 таңба",
-        "passwordMismatch": "Құпия сөздер сәйкес келуі керек"
+        "emailInvalid": "Jaramdy email emes",
+        "required": "Mindetti órіs",
+        "passwordMin": "Eń az 6 tańba",
+        "passwordMismatch": "Qupıa sózder sáıkes kelýi kerek",
+        "loadingError": "Bul betti júkteý kezinde qate oryn aldy",
+        "unexpected": "Kútpegen qate oryn aldy! Ótinemiz, keıinirek qaıtalap kórińiz"
     },
-    "loading": "Күте тұрыңыз...",
+    "loading": "Kúte turıńyz...",
     "register": {
-        "welcome": "Бос орындарды тезірек жабыңыз!",
-        "description": "Тіркеліп, ең жақсы үміткерлерді табыңыз!",
-        "name": "Аты",
-        "surname": "Тегі",
-        "password": "Құпия сөз",
-        "confirmPassword": "Құпия сөзді растаңыз",
-        "button": "Тіркелу",
-        "haveAccount": "Аккаунтыңыз бар ма?",
-        "login": "Кіру!"
-    }
+        "welcome": "Bos oryndardy tezіrek jabıńyz!",
+        "description": "Tirkelip, úzdik úmitkerlerdi tabıńyz!",
+        "name": "Aty",
+        "surname": "Tegi",
+        "password": "Qupıa sóz",
+        "confirmPassword": "Qupıa sózdi rastańyz",
+        "button": "Tirkelý",
+        "haveAccount": "Tirkelgińiz bar ma?",
+        "success": "Sátti tirkeldiń!",
+        "login": "Kirý!"
+    },
+    "profile": {
+        "employees": "jumysker",
+        "generalInfo": "Jalpy aqparat",
+        "fullName": "Aty-jóni",
+        "specialization": "Laýazym",
+        "contacts": "Baılanys derekteri",
+        "avgDays": "Bos oryndy jabýdyń ortasha ýaqyty",
+        "totalEmployees": "Jaldanǵan qyzmetkerler sany",
+        "employeesGrowth": "Úmitkerler ósimi",
+        "differences": "Ótken aımen salystyrǵanda",
+        "employeeGrowthDynamics": "Úmitkerler sanynıń ósý dınamıkasy",
+        "recruitmentFunnel": "Jaldaý qıfı",
+        "totalResumes": "Alynǵan túıindeme",
+        "passedPhoneScreening": "Telefon arqyly skrınıngten ótti",
+        "invitedToInterview": "Suhbatqa shaqyryldy",
+        "gotOffer": "Usynys aldy"
+    },
+    "sidebar": {}
 }

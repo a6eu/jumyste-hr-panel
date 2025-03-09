@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
 import { NextPage } from 'next'
-import EmailForm from '@/components/forgot-password/email-form'
-import CodeVerificationForm from '@/components/forgot-password/code-verification-form'
-import ResetPasswordForm from '@/components/forgot-password/new-password-form'
+import EmailForm from '@/components/reset-password/email-form'
+import CodeVerificationForm from '@/components/reset-password/code-verification-form'
+import ResetPasswordForm from '@/components/reset-password/new-password-form'
 import { cn } from '@/lib/twmerge'
 
 const ForgotPassword: NextPage = () => {
@@ -14,19 +14,20 @@ const ForgotPassword: NextPage = () => {
     const [verificationCode, setVerificationCode] = useState('')
     const [email, setEmail] = useState('')
 
+
     return (
         <div
             className={cn(
                 'flex lg:flex-row-reverse items-center h-screen px-8 md:px-40 py-16 gap-10 md:gap-24',
                 step === 'code'
                     ? 'justify-center'
-                    : 'justify-center lg:justify-between'
+                    : 'justify-center lg:justify-between',
             )}
         >
             <div
                 className={cn(
                     'bg-secondaryLight/50 h-64 md:h-full w-full md:flex-1 rounded-3xl',
-                    step !== 'code' ? 'hidden lg:flex' : 'hidden'
+                    step !== 'code' ? 'hidden lg:flex' : 'hidden',
                 )}
             ></div>
             <div className="w-full max-w-md flex justify-center">
@@ -34,7 +35,7 @@ const ForgotPassword: NextPage = () => {
                     <Image
                         className={cn(
                             'self-center',
-                            step === 'code' && 'hidden'
+                            step === 'code' && 'hidden',
                         )}
                         src={Logo}
                         alt="Logo"
@@ -49,6 +50,7 @@ const ForgotPassword: NextPage = () => {
                     )}
                     {step === 'code' && (
                         <CodeVerificationForm
+                            email={email}
                             onNext={(code) => {
                                 setStep('reset')
                                 setVerificationCode(code)
@@ -56,7 +58,10 @@ const ForgotPassword: NextPage = () => {
                         />
                     )}
                     {step === 'reset' && (
-                        <ResetPasswordForm code={verificationCode} email={email} />
+                        <ResetPasswordForm
+                            code={verificationCode}
+                            email={email}
+                        />
                     )}
                 </div>
             </div>

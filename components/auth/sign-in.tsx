@@ -6,22 +6,20 @@ import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
 import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import { useAppDispatch } from '@/store/store'
+import { RootState, useAppDispatch } from '@/redux/store'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/store/store'
-import { signIn } from '@/store/auth/authSlice'
+import { signIn } from '@/redux/auth/authSlice'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/twmerge'
 import { useTranslation } from 'react-i18next'
 import { useToast } from '@/hooks/use-toast'
-
 
 const SignIn = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const { loading, error } = useSelector((state: RootState) => state.auth)
     const [showPassword, setShowPassword] = useState(false)
-    const {showToast} = useToast()
+    const { showToast } = useToast()
 
     const formik = useFormik({
         initialValues: {
@@ -41,11 +39,12 @@ const SignIn = () => {
         },
     })
 
+
     useEffect(() => {
         if (error) {
-            showToast('error', "Error!")
+            showToast('error', 'Неправильные учетные данные!')
         }
-    }, [error])
+    }, [error, showToast])
 
     const handleShowPassword = () => setShowPassword(!showPassword)
 
@@ -114,7 +113,7 @@ const SignIn = () => {
                 </div>
 
                 <Link
-                    href="/auth/forgot-password"
+                    href="/auth/reset-password"
                     className="text-primary self-end cursor-pointer"
                 >
                     {t('login.forgotPassword')}
@@ -124,7 +123,7 @@ const SignIn = () => {
                     type="submit"
                     className={cn(
                         'rounded-xl text-white h-12',
-                        !loading ? 'bg-button' : 'bg-button/50'
+                        !loading ? 'bg-button' : 'bg-button/50',
                     )}
                     disabled={loading}
                 >

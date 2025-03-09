@@ -1,15 +1,17 @@
 import $api from '@/http/setup'
 import { isAxiosError } from 'axios'
 import { useFormik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 
 const EmailForm = ({ onNext }: { onNext: (email: string) => void }) => {
+    const { t } = useTranslation()
     const formik = useFormik({
         initialValues: { email: '' },
         validationSchema: Yup.object({
             email: Yup.string()
-                .email('Некорректный email')
-                .required('Обязательное поле'),
+                .email(t('errors.emailInvalid'))
+                .required(t('errors.required')),
         }),
         onSubmit: (values) => {
             try {
@@ -25,8 +27,8 @@ const EmailForm = ({ onNext }: { onNext: (email: string) => void }) => {
 
     return (
         <>
-            <h1 className="text-3xl mt-20 mb-4">Восстановление пароля</h1>
-            <p>Введите ваш email, и мы отправим вам код для сброса пароля</p>
+            <h1 className="text-3xl mt-20 mb-4">{t('resetPassword.title')}</h1>
+            <p>{t('resetPassword.description')}</p>
             <form
                 className="flex flex-col space-y-14 mt-8"
                 onSubmit={formik.handleSubmit}
@@ -51,7 +53,7 @@ const EmailForm = ({ onNext }: { onNext: (email: string) => void }) => {
                     type="submit"
                     className="rounded-xl text-white h-12 bg-button"
                 >
-                    Отправить код
+                    {t('resetPassword.button')}
                 </button>
             </form>
         </>
