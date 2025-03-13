@@ -1,15 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { User, ArrowLeft } from 'lucide-react'
+import { ArrowLeft, User } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch } from '@/redux/store'
-import { updateProfile } from '@/redux/auth/authSlice'
 
 const EditProfilePage = () => {
     const router = useRouter()
-    const dispatch = useAppDispatch()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -23,11 +20,7 @@ const EditProfilePage = () => {
     }
 
     const handleUpdateProfile = async () => {
-        await dispatch(
-            updateProfile({
-                first_name: formData.name,
-            })
-        )
+        console.log(formData)
     }
 
     return (
@@ -44,12 +37,14 @@ const EditProfilePage = () => {
                     Редактирование профиля
                 </h1>
 
-                <div className="border border-[#E4E4E4] rounded-2xl p-6 mt-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-14">
+                <div
+                    className="border border-[#E4E4E4] rounded-2xl p-6 mt-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-14">
                     <div className="relative">
                         <div className="bg-secondaryLight size-32 rounded-full flex justify-center items-center">
                             <User size={65} />
                         </div>
-                        <div className="bg-[#493D9E] size-[50px] rounded-full flex justify-center items-center absolute -bottom-2 right-0 cursor-pointer">
+                        <div
+                            className="bg-[#493D9E] size-[50px] rounded-full flex justify-center items-center absolute -bottom-2 right-0 cursor-pointer">
                             <Image
                                 src="/svg/camera.svg"
                                 alt=""

@@ -4,10 +4,8 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
 import { NextPage } from 'next'
-import EmailForm from '@/components/reset-password/email-form'
-import CodeVerificationForm from '@/components/reset-password/code-verification-form'
-import ResetPasswordForm from '@/components/reset-password/new-password-form'
-import { cn } from '@/lib/twmerge'
+import { CodeVerificationForm, EmailForm, ResetPasswordForm } from '@/features/reset-password'
+import { cn } from '@/shared/lib/twmerge'
 
 const ForgotPassword: NextPage = () => {
     const [step, setStep] = useState<'email' | 'code' | 'reset'>('email')

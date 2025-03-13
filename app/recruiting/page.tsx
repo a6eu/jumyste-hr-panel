@@ -1,5 +1,5 @@
-import PageHeader from '@/components/page-header'
-import JobCreateForm from '@/components/jobs/job-create-form'
+import { PageHeader } from '@/widgets'
+import { JobCreateForm } from '@/features/jobs'
 
 const RecruitingPage = () => {
     return (

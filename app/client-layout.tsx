@@ -1,26 +1,32 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { store } from '@/redux/store'
-import { Sidebar } from '@/components/sidebar'
+import { Header, MainContainer, Sidebar } from '@/widgets/'
 import { Provider } from 'react-redux'
 import { usePathname } from 'next/navigation'
-import { ToastProvider } from '@/hooks/use-toast'
+import { ToastProvider } from '@/shared/hooks'
+import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-const Header = dynamic(() => import('../components/header'), { ssr: false })
+const queryClient = new QueryClient()
 
-export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
+export function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
+
 
     return (
         <Provider store={store}>
-            <div className="flex w-full">
-                <Sidebar />
-                <div className="w-full">
-                    {!pathname.includes('/auth') && <Header />}
-                    <ToastProvider>{children}</ToastProvider>
+            <QueryClientProvider client={queryClient}>
+                <div className="flex w-full">
+                    <Sidebar />
+                    <div className="w-full">
+                        {!pathname.includes('/auth') && <Header />}
+                        <ToastProvider>
+                            <MainContainer>{children}</MainContainer>
+                        </ToastProvider>
+                    </div>
                 </div>
-            </div>
+            </QueryClientProvider>
         </Provider>
     )
 }
