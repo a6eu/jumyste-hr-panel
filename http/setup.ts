@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'https://jumyste-app-backend-production.up.railway.app'
+const API_BASE_URL = 'https://jumyaste-app-backend-production.up.railway.app/api/'
 
 const $api = axios.create({
     baseURL: API_BASE_URL,
@@ -52,7 +52,7 @@ $api.interceptors.response.use(
             try {
                 const refreshToken = localStorage.getItem('refresh_token')
                 const response = await axios.post(
-                    `${API_BASE_URL}/auth/refresh`,
+                    `${API_BASE_URL}auth/refresh`,
                     { refreshToken },
                 )
 
@@ -64,7 +64,7 @@ $api.interceptors.response.use(
 
                 return $api(originalRequest)
             } catch (refreshError) {
-                localStorage.removeItem('access_token')
+                localStorage.removeItem('token')
                 localStorage.removeItem('refresh_token')
                 if (window.location.pathname !== '/auth') {
                     window.location.href = '/auth?reg=true'

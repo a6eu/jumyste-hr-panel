@@ -4,10 +4,8 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Logo from '@/public/logo-text.svg'
 import { NextPage } from 'next'
-import EmailForm from '@/components/reset-password/email-form'
-import CodeVerificationForm from '@/components/reset-password/code-verification-form'
-import ResetPasswordForm from '@/components/reset-password/new-password-form'
-import { cn } from '@/lib/twmerge'
+import { cn } from '@/shared/utils'
+import { CodeVerificationForm, EmailForm, ResetPasswordForm } from '@/features/reset-password'
 
 const ForgotPassword: NextPage = () => {
     const [step, setStep] = useState<'email' | 'code' | 'reset'>('email')
@@ -26,10 +24,12 @@ const ForgotPassword: NextPage = () => {
         >
             <div
                 className={cn(
-                    'bg-secondaryLight/50 h-64 md:h-full w-full md:flex-1 rounded-3xl',
+                    'h-64 md:h-full w-full md:flex-1 rounded-3xl',
                     step !== 'code' ? 'hidden lg:flex' : 'hidden',
                 )}
-            ></div>
+            >
+                <img className="w-full h-full object-contain" src={step === "email" ? '/images/forgot-password.png' : "/images/reset-password.png"} alt="" />
+            </div>
             <div className="w-full max-w-md flex justify-center">
                 <div className="flex flex-col flex-1 self-center">
                     <Image

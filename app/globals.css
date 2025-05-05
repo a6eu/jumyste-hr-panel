@@ -152,9 +152,43 @@
     background-size: cover;
 }
 
+.job-description ul {
+    margin-left: 10px;
+    padding-left: 10px;
+    list-style-type: disc;
+}
+
+.job-description li {
+    margin-bottom: 5px;
+}
+
+button {
+    cursor: pointer;
+    user-select: none;
+}
+
+.match-shadow {
+    box-shadow: 0 0 10px 0 #baffd0;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    margin-right: 5px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #7C4DFF;
+    border-radius: 10px;
+}
+
 @layer base {
     :root {
-        --background: 0 0% 100%;
+        --background: #FDFCFA;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
         --card-foreground: 0 0% 3.9%;
@@ -180,6 +214,7 @@
         --chart-5: 27 87% 67%;
         --radius: 0.5rem;
     }
+
     .dark {
         --background: 0 0% 3.9%;
         --foreground: 0 0% 98%;
@@ -212,7 +247,8 @@
     * {
         @apply border-border;
     }
+
     body {
-        @apply bg-background text-foreground;
+        @apply bg-[#FDFCFA];
     }
 }

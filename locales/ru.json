@@ -1,63 +1,184 @@
 {
-    "login": {
-        "welcome": "С возвращением!",
-        "description": "Войдите в систему",
-        "email": "Электронная почта",
-        "password": "Пароль",
-        "forgotPassword": "Забыли пароль?",
-        "button": "Войти",
-        "noAccount": "Вы здесь впервые?",
-        "register": "Зарегистрироваться!",
-        "success": "Успешно зарегистрировались!"
+  "login": {
+    "welcome": "С возвращением!",
+    "description": "Войдите в систему",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "forgotPassword": "Забыли пароль?",
+    "button": "Войти",
+    "noAccount": "Вы здесь впервые?",
+    "register": "Зарегистрироваться!",
+    "success": "Успешно зарегистрировались!"
+  },
+  "resetPassword": {
+    "title": "Сброс пароля",
+    "description": "Введите свой адрес электронной почты, и мы отправим вам код для сброса пароля",
+    "email": "Электронная почта",
+    "button": "Отправить код",
+    "confirmCode": "Подтвердить код",
+    "codeDescription": "Введите 4-значный код, который мы отправили вам на почту",
+    "resendButton": "Отправить код еще раз",
+    "timer": "Можно будет отправить повторно через",
+    "confirmButton": "Подтвердить код",
+    "finalDescription": "Создайте новый пароль и введите его дважды для подтверждения"
+  },
+  "errors": {
+    "emailInvalid": "Некорректный email",
+    "required": "Обязательное поле",
+    "passwordMin": "Минимум 6 символов",
+    "passwordMismatch": "Пароли должны совпадать",
+    "loadingError": "Произошла ошибка при загрузке данной страницы",
+    "unexpected": "Произошла непридвиденная ошибка! Пожалуйста, попробуйте еще раз, но позже"
+  },
+  "loading": "Ожидайте...",
+  "register": {
+    "welcome": "Закрывайте вакансии быстрее!",
+    "description": "Регистрируйтесь и находите лучших кандидатов!",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "button": "Зарегистрироваться",
+    "haveAccount": "Уже есть аккаунт?",
+    "success": "Успешно зарегистрировались!",
+    "login": "Войти!"
+  },
+  "profile": {
+    "generalInfo": "Общие сведения",
+    "employees": "сотрудников",
+    "fullName": "ФИО",
+    "specialization": "Должность",
+    "contacts": "Контактные данные",
+    "avgDays": "Среднее количество дней закрытии вакансии",
+    "totalEmployees": "Количество нанятых сотрудников",
+    "employeesGrowth": "Рост кандидатов",
+    "differences": "По сравнению с прошлым месяцем",
+    "employeeGrowthDynamics": "Динамика роста количества кандидатов",
+    "recruitmentFunnel": "Воронка найма",
+    "totalResumes": "Получено резюме",
+    "passedPhoneScreening": "Прошли телефонный скрининг",
+    "invitedToInterview": "Приглашены на интервью",
+    "gotOffer": "Получили оффер"
+  },
+  "sidebar": {
+    "team": "Команда",
+    "employees": "Сотрудники",
+    "mainMenu": {
+      "title": "Главное меню",
+      "bulletinBoard": "Доска объявлений",
+      "recruiting": "Рекрутинг",
+      "schedule": "График",
+      "messages": "Сообщения"
     },
-    "resetPassword": {
-        "title": "Сброс пароля",
-        "description": "Введите свой адрес электронной почты, и мы отправим вам код для сброса пароля",
-        "email": "Электронная почта",
-        "button": "Отправить код",
-        "confirmCode": "Подтвердить код",
-        "codeDescription": "Введите 4-значный код, который мы отправили вам на почту",
-        "resendButton": "Отправить код еще раз",
-        "timer": "Можно будет отправить повторно через",
-        "confirmButton": "Подтвердить код",
-        "finalDescription": "Создайте новый пароль и введите его дважды для подтверждения"
+    "departments": {
+      "title": "Департаменты",
+      "button": "Добавить"
     },
-    "errors": {
-        "emailInvalid": "Некорректный email",
-        "required": "Обязательное поле",
-        "passwordMin": "Минимум 6 символов",
-        "passwordMismatch": "Пароли должны совпадать",
-        "loadingError": "Произошла ошибка при загрузке данной страницы",
-        "unexpected": "Произошла непридвиденная ошибка! Пожалуйста, попробуйте еще раз, но позже"
-    },
-    "loading": "Ожидайте...",
-    "register": {
-        "welcome": "Закрывайте вакансии быстрее!",
-        "description": "Регистрируйтесь и находите лучших кандидатов!",
-        "name": "Имя",
-        "surname": "Фамилия",
-        "password": "Пароль",
-        "confirmPassword": "Подтвердите пароль",
-        "button": "Зарегистрироваться",
-        "haveAccount": "Уже есть аккаунт?",
-        "success": "Успешно зарегистрировались!",
-        "login": "Войти!"
-    },
-    "profile": {
-        "generalInfo": "Общие сведения",
-        "employees": "сотрудников",
-        "fullName": "ФИО",
-        "specialization": "Должность",
-        "contacts": "Контактные данные",
-        "avgDays": "Среднее количество дней закрытии вакансии",
-        "totalEmployees": "Количество нанятых сотрудников",
-        "employeesGrowth": "Рост кандидатов",
-        "differences": "По сравнению с прошлым месяцем",
-        "employeeGrowthDynamics": "Динамика роста количества кандидатов",
-        "recruitmentFunnel": "Воронка найма",
-        "totalResumes": "Получено резюме",
-        "passedPhoneScreening": "Прошли телефонный скрининг",
-        "invitedToInterview": "Приглашены на интервью",
-        "gotOffer": "Получили оффер"
+    "settings": "Настройки",
+    "switchLang": "Сменить язык"
+  },
+  "header": {
+    "userMenu": {
+      "profile": "Профиль",
+      "logout": "Выйти"
     }
+  },
+  "jobForm": {
+    "title": "Форма создания вакансии",
+    "companyName": {
+      "title": "Название компании",
+      "placeholder": "Введите название вакансии"
+    },
+    "jobType": {
+      "title": "Тип занятости",
+      "array": [
+        {
+          "label": "Полная занятость",
+          "value": "Full time"
+        },
+        {
+          "label": "Частичная занятость",
+          "value": "Half time"
+        },
+        {
+          "label": "Фриланс",
+          "value": "Freelance"
+        },
+        {
+          "label": "Стажировка",
+          "value": "Internship"
+        }
+      ]
+    },
+    "workFormat": {
+      "title": "Формат работы",
+      "array": [
+        {
+          "label": "Офис",
+          "value": "Office"
+        },
+        {
+          "label": "Удаленно",
+          "value": "Remote"
+        },
+        {
+          "label": "Гибрид",
+          "value": "Hybrid"
+        }
+      ]
+    },
+    "experience": {
+      "title": "Опыт работы",
+      "array": [
+        {
+          "label": "Без опыта",
+          "value": "No experience"
+        },
+        {
+          "label": "1-3 года",
+          "value": "1-3 years"
+        },
+        {
+          "label": "3-5 лет",
+          "value": "3-5 years"
+        },
+        {
+          "label": "5-7 лет",
+          "value": "5-7 years"
+        },
+        {
+          "label": "Более 7 лет",
+          "value": "7+ years"
+        }
+      ]
+    },
+    "salary": {
+      "title": "Зарплата",
+      "checkbox": "Не показывать зарплату"
+    },
+    "location": {
+      "title": "Местоположение",
+      "placeholder": "Выберите местоположение"
+    },
+    "skills": {
+      "title": "Навыки",
+      "placeholder": "Выберите навыки"
+    },
+    "jobDescription": "Описание вакансии",
+    "submit": "Опубликовать вакансию",
+    "backButton": "Назад"
+  },
+  "jobsPage": {
+    "title": "Список вакансий",
+    "createButton": "Создать вакансию",
+    "search": "Поиск по вакансиям",
+    "loadMore": "Загрузить еще",
+    "job": {
+      "seeDetails": "Посмотреть детали",
+      "edit": "Редактировать",
+      "keySkills": "Ключевые навыки",
+      "uploaded": "Опубликовано",
+      "response": "откликов"
+    }
+  }
 }

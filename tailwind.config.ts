@@ -7,11 +7,14 @@ export default {
         './pages/**/*.{js,ts,jsx,tsx,mdx}',
         './components/**/*.{js,ts,jsx,tsx,mdx}',
         './app/**/*.{js,ts,jsx,tsx,mdx}',
+        './features/**/*.{js,ts,jsx,tsx,mdx}',
+        './shared/**/*.{js,ts,jsx,tsx,mdx}',
+        './entities/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
         extend: {
             colors: {
-                background: 'hsl(var(--background))',
+                background: '#FDFCFA',
                 foreground: 'hsl(var(--foreground))',
                 primary: '#493D9E',
                 primaryLight: '#B2A5FF',
@@ -22,7 +25,9 @@ export default {
                 neutralLight: '#FDFCFA',
                 button: '#8B5DFF',
                 gray: '#EBEBEB',
-                border: 'hsl(var(--border))',
+                lightGray: '#F7F7F7',
+                border: '#C7C7C7',
+                midGray: '#C4C4C4',
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',

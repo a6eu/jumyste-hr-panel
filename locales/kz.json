@@ -1,64 +1,135 @@
 {
-    "login": {
-        "welcome": "Qaıta oralýyńyzben!",
-        "description": "Júıege kirińiz",
-        "email": "Elektrondy poshta",
-        "password": "Qupıa sóz",
-        "forgotPassword": "Qupıa sózdi umyttyńyz ba?",
-        "button": "Kirý",
-        "noAccount": "Munda alǵash ret pe?",
-        "register": "Tirkelý!",
-        "success": "Sátti tirkeldiń!"
+  "login": {
+    "welcome": "Qaıta oralýyńyzben!",
+    "description": "Júıege kirińiz",
+    "email": "Elektrondy poshta",
+    "password": "Qupıa sóz",
+    "forgotPassword": "Qupıa sózdi umyttyńyz ba?",
+    "button": "Kirý",
+    "noAccount": "Munda alǵash ret pe?",
+    "register": "Tirkelý!",
+    "success": "Sátti tirkeldiń!"
+  },
+  "resetPassword": {
+    "title": "Құпиясөзді қалпына келтіру",
+    "description": "Электрондық поштаңызды енгізіңіз, біз сізге құпиясөзді қалпына келтіру кодын жібереміз",
+    "email": "Электрондық пошта",
+    "button": "Код жіберу",
+    "confirmCode": "Кодты растау",
+    "codeDescription": "Электрондық поштаңызға жіберілген 4 таңбалы кодты енгізіңіз",
+    "resendButton": "Кодты қайта жіберу",
+    "timer": "Қайта жіберу мүмкіндігі",
+    "confirmButton": "Кодты растау",
+    "finalDescription": "Жаңа құпиясөзді жасаңыз және оны растау үшін екі рет енгізіңіз"
+  },
+  "errors": {
+    "emailInvalid": "Jaramdy email emes",
+    "required": "Mindetti órіs",
+    "passwordMin": "Eń az 6 tańba",
+    "passwordMismatch": "Qupıa sózder sáıkes kelýi kerek",
+    "loadingError": "Bul betti júkteý kezinde qate oryn aldy",
+    "unexpected": "Kútpegen qate oryn aldy! Ótinemiz, keıinirek qaıtalap kórińiz"
+  },
+  "loading": "Kúte turıńyz...",
+  "register": {
+    "welcome": "Bos oryndardy tezіrek jabıńyz!",
+    "description": "Tirkelip, úzdik úmitkerlerdi tabıńyz!",
+    "name": "Aty",
+    "surname": "Tegi",
+    "password": "Qupıa sóz",
+    "confirmPassword": "Qupıa sózdi rastańyz",
+    "button": "Tirkelý",
+    "haveAccount": "Tirkelgińiz bar ma?",
+    "success": "Sátti tirkeldiń!",
+    "login": "Kirý!"
+  },
+  "profile": {
+    "employees": "jumysker",
+    "generalInfo": "Jalpy aqparat",
+    "fullName": "Aty-jóni",
+    "specialization": "Laýazym",
+    "contacts": "Baılanys derekteri",
+    "avgDays": "Bos oryndy jabýdyń ortasha ýaqyty",
+    "totalEmployees": "Jaldanǵan qyzmetkerler sany",
+    "employeesGrowth": "Úmitkerler ósimi",
+    "differences": "Ótken aımen salystyrǵanda",
+    "employeeGrowthDynamics": "Úmitkerler sanynıń ósý dınamıkasy",
+    "recruitmentFunnel": "Jaldaý qıfı",
+    "totalResumes": "Alynǵan túıindeme",
+    "passedPhoneScreening": "Telefon arqyly skrınıngten ótti",
+    "invitedToInterview": "Suhbatqa shaqyryldy",
+    "gotOffer": "Usynys aldy"
+  },
+  "sidebar": {
+    "team": "Komanda",
+    "employees": "qyzmetkerler",
+    "mainMenu": {
+      "title": "negizgi mázir",
+      "bulletinBoard": "Habarlandyrý taqtasy",
+      "recruiting": "Rekruting",
+      "schedule": "Keste",
+      "messages": "Habarlamalar"
     },
-    "resetPassword": {
-        "title": "Құпиясөзді қалпына келтіру",
-        "description": "Электрондық поштаңызды енгізіңіз, біз сізге құпиясөзді қалпына келтіру кодын жібереміз",
-        "email": "Электрондық пошта",
-        "button": "Код жіберу",
-        "confirmCode": "Кодты растау",
-        "codeDescription": "Электрондық поштаңызға жіберілген 4 таңбалы кодты енгізіңіз",
-        "resendButton": "Кодты қайта жіберу",
-        "timer": "Қайта жіберу мүмкіндігі",
-        "confirmButton": "Кодты растау",
-        "finalDescription": "Жаңа құпиясөзді жасаңыз және оны растау үшін екі рет енгізіңіз"
+    "departments": {
+      "title": "Departamentter",
+      "button": "Qosý"
     },
-    "errors": {
-        "emailInvalid": "Jaramdy email emes",
-        "required": "Mindetti órіs",
-        "passwordMin": "Eń az 6 tańba",
-        "passwordMismatch": "Qupıa sózder sáıkes kelýi kerek",
-        "loadingError": "Bul betti júkteý kezinde qate oryn aldy",
-        "unexpected": "Kútpegen qate oryn aldy! Ótinemiz, keıinirek qaıtalap kórińiz"
+    "settings": "Parametrler",
+    "switchLang": "Tildi ózgertý"
+  },
+  "header": {
+    "userMenu": {
+      "profile": "Profil",
+      "logout": "Shyǵý"
+    }
+  },
+  "jobForm": {
+    "title": "Jumys formasy",
+    "companyName": {
+      "title": "Kompanıanyń ataýy",
+      "placeholder": "Laýazym ataýyn engizińiz"
     },
-    "loading": "Kúte turıńyz...",
-    "register": {
-        "welcome": "Bos oryndardy tezіrek jabıńyz!",
-        "description": "Tirkelip, úzdik úmitkerlerdi tabıńyz!",
-        "name": "Aty",
-        "surname": "Tegi",
-        "password": "Qupıa sóz",
-        "confirmPassword": "Qupıa sózdi rastańyz",
-        "button": "Tirkelý",
-        "haveAccount": "Tirkelgińiz bar ma?",
-        "success": "Sátti tirkeldiń!",
-        "login": "Kirý!"
+    "jobType": {
+      "title": "Jumyspen qamtý túri",
+      "array": [
+        { "label": "Tolyq ýaqyt", "value": "Full time" },
+        { "label": "Úzilis", "value": "Half time" },
+        { "label": "Shtattan tys", "value": "Freelance" },
+        { "label": "Taǵylymdama", "value": "Internship" }
+      ]
     },
-    "profile": {
-        "employees": "jumysker",
-        "generalInfo": "Jalpy aqparat",
-        "fullName": "Aty-jóni",
-        "specialization": "Laýazym",
-        "contacts": "Baılanys derekteri",
-        "avgDays": "Bos oryndy jabýdyń ortasha ýaqyty",
-        "totalEmployees": "Jaldanǵan qyzmetkerler sany",
-        "employeesGrowth": "Úmitkerler ósimi",
-        "differences": "Ótken aımen salystyrǵanda",
-        "employeeGrowthDynamics": "Úmitkerler sanynıń ósý dınamıkasy",
-        "recruitmentFunnel": "Jaldaý qıfı",
-        "totalResumes": "Alynǵan túıindeme",
-        "passedPhoneScreening": "Telefon arqyly skrınıngten ótti",
-        "invitedToInterview": "Suhbatqa shaqyryldy",
-        "gotOffer": "Usynys aldy"
+    "workFormat": {
+      "title": "Jumys formaty",
+      "array": [
+        { "label": "Keńse", "value": "Office" },
+        { "label": "Qashyqtan", "value": "Remote" },
+        { "label": "Gıbrıdti", "value": "Hybrid" }
+      ]
     },
-    "sidebar": {}
+    "experience": {
+      "title": "Tájirıbe",
+      "array": [
+        { "label": "Tájirıbe joq", "value": "No experience" },
+        { "label": "1-3 jas", "value": "1-3 years" },
+        { "label": "3-5 jas", "value": "3-5 years" },
+        { "label": "5-7 jas", "value": "5-7 years" },
+        { "label": "7+ jas", "value": "7+ years" }
+      ]
+    },
+    "salary": {
+      "title": "Jalaqy",
+      "checkbox": "Jalaqyny kórsetpeý"
+    },
+    "location": {
+      "title": "Ornalasqan jeri",
+      "placeholder": "Oryndy Tańdańyz"
+    },
+    "skills": {
+      "title": "Daǵdylar",
+      "placeholder": "Daǵdylardy Tańdaý"
+    },
+    "jobDescription": "Laýazymdyq sippattaması",
+    "submit": "Jumysty tapsyrý",
+    "backButton": "Artqa"
+  }
 }

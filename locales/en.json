@@ -1,62 +1,140 @@
 {
-    "login": {
-        "welcome": "Welcome back!",
-        "description": "Log in to the system",
-        "email": "Email",
-        "password": "Password",
-        "forgotPassword": "Forgot password?",
-        "button": "Log in",
-        "noAccount": "First time here?",
-        "register": "Register!",
-        "success": "Successfully logged in!"
+  "login": {
+    "welcome": "Welcome back!",
+    "description": "Log in to the system",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "button": "Log in",
+    "noAccount": "First time here?",
+    "register": "Register!",
+    "success": "Successfully logged in!"
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "description": "Enter your email address and we will send you a password reset code",
+    "email": "Email",
+    "button": "Send code",
+    "confirmCode": "Confirm code",
+    "codeDescription": "Enter the 4-digit code we sent you via email",
+    "resendButton": "Resend code",
+    "timer": "Will be able to resend in",
+    "confirmButton": "Confirm code",
+    "finalDescription": "Create a new password and enter it twice for confirmation"
+  },
+  "errors": {
+    "emailInvalid": "Invalid email",
+    "required": "Required field",
+    "passwordMin": "Minimum 6 characters",
+    "passwordMismatch": "Passwords must match",
+    "loadingError": "An error occurred while loading this page",
+    "unexpected": "An unexpected error occurred! Please try again later"
+  },
+
+  "loading": "Loading...",
+  "register": {
+    "welcome": "Close vacancies faster!",
+    "description": "Register and find the best candidates!",
+    "name": "First name",
+    "surname": "Last name",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "button": "Register",
+    "haveAccount": "Already have an account?",
+    "success": "Successfully registered!",
+    "login": "Log in!"
+  },
+  "profile": {
+    "generalInfo": "General Information",
+    "fullName": "Full name",
+    "specialization": "Position",
+    "contacts": "Contact information",
+    "avgDays": "Average time to close a vacancy",
+    "totalEmployees": "Number of hired employees",
+    "employeesGrowth": "Candidate growth",
+    "differences": "Compared to last month",
+    "employeeGrowthDynamics": "Candidate growth dynamics",
+    "recruitmentFunnel": "Recruitment funnel",
+    "totalResumes": "Resumes received",
+    "passedPhoneScreening": "Passed phone screening",
+    "invitedToInterview": "Invited to interview",
+    "gotOffer": "Received offer"
+  },
+  "sidebar": {
+    "team": "Team",
+    "employees": "employees",
+    "mainMenu": {
+      "title": "Main menu",
+      "bulletinBoard": "Bulletin Board",
+      "recruiting": "Recruiting",
+      "schedule": "Schedule",
+      "messages": "Messages"
     },
-    "resetPassword": {
-        "title": "Reset password",
-        "description": "Enter your email address and we will send you a password reset code",
-        "email": "Email",
-        "button": "Send code",
-        "confirmCode": "Confirm code",
-        "codeDescription": "Enter the 4-digit code we sent you via email",
-        "resendButton": "Resend code",
-        "timer": "Will be able to resend in",
-        "confirmButton": "Confirm code",
-        "finalDescription": "Create a new password and enter it twice for confirmation"
+    "departments": {
+      "title": "Departments",
+      "button": "Add"
     },
-    "errors": {
-        "emailInvalid": "Invalid email",
-        "required": "Required field",
-        "passwordMin": "Minimum 6 characters",
-        "passwordMismatch": "Passwords must match",
-        "loadingError": "An error occurred while loading this page",
-        "unexpected": "An unexpected error occurred! Please try again later"
-    },
-    "loading": "Loading...",
-    "register": {
-        "welcome": "Close vacancies faster!",
-        "description": "Register and find the best candidates!",
-        "name": "First name",
-        "surname": "Last name",
-        "password": "Password",
-        "confirmPassword": "Confirm password",
-        "button": "Register",
-        "haveAccount": "Already have an account?",
-        "success": "Successfully registered!",
-        "login": "Log in!"
-    },
-    "profile": {
-        "generalInfo": "General Information",
-        "fullName": "Full name",
-        "specialization": "Position",
-        "contacts": "Contact information",
-        "avgDays": "Average time to close a vacancy",
-        "totalEmployees": "Number of hired employees",
-        "employeesGrowth": "Candidate growth",
-        "differences": "Compared to last month",
-        "employeeGrowthDynamics": "Candidate growth dynamics",
-        "recruitmentFunnel": "Recruitment funnel",
-        "totalResumes": "Resumes received",
-        "passedPhoneScreening": "Passed phone screening",
-        "invitedToInterview": "Invited to interview",
-        "gotOffer": "Received offer"
+    "settings": "Settings",
+    "switchLang": "Switch language"
+  },
+  "header": {
+    "userMenu": {
+      "profile": "Profile",
+      "logout": "Log out"
     }
+  },
+  "jobForm": {
+    "title": "Job create form",
+    "companyName": {
+      "title": "Company name",
+      "placeholder": "Enter job title"
+    },
+    "jobType": {
+      "title": "Employment type",
+      "array": [
+        { "label": "Full time", "value": "Full time" },
+        { "label": "Half time", "value": "Half time" },
+        { "label": "Freelance", "value": "Freelance" },
+        { "label": "Internship", "value": "Internship" }
+      ]
+    },
+    "workFormat": {
+      "title": "Work format",
+      "array": [
+        { "label": "Office", "value": "Office" },
+        { "label": "Remote", "value": "Remote" },
+        { "label": "Hybrid", "value": "Hybrid" }
+      ]
+    },
+    "experience": {
+      "title": "Experience",
+      "array": [
+        { "label": "No experience", "value": "No experience" },
+        { "label": "1-3 years", "value": "1-3 years" },
+        { "label": "3-5 years", "value": "3-5 years" },
+        { "label": "5-7 years", "value": "5-7 years" },
+        { "label": "7+ years", "value": "7+ years" }
+      ]
+    },
+    "salary": {
+      "title": "Salary",
+      "checkbox": "Don't show salary"
+    },
+    "location": {
+      "title": "Location",
+      "placeholder": "Choose location"
+    },
+    "skills": {
+      "title": "Skills",
+      "placeholder": "Select skills"
+    },
+    "jobDescription": "Job description",
+    "submit": "Submit job",
+    "backButton": "Back"
+  },
+  "jobPage": {
+    "title": "Jobs list",
+    "searchInput": "Search jobs",
+    "createButton": "Create job"
+  }
 }
