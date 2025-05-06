@@ -9,6 +9,10 @@ export interface IUser {
     linkedin?: string
     telegram?: string
     github?: string
+    is_owner: boolean
+    company: {
+        name: string
+    }
 }
 
 export interface ICandidate {

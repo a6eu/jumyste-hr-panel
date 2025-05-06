@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/shared/utils'
-import { CalendarDays, ClipboardList, MessageSquareText, Plus, UserPlus, X } from 'lucide-react'
+import { CalendarDays, ClipboardList, MessageSquareText, Plus, UserPlus } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { Settings } from '@/shared/ui/settings'
 import { useTranslation } from 'react-i18next'
 import { openSidebar } from '@/shared/widgets/models/sidebarSlice'
 import $api from '@/http/setup'
+import Link from 'next/link'
 
 const menuLinks = [
     {
@@ -43,6 +44,7 @@ export const Sidebar = () => {
     const router = useRouter()
     const isOpen = useAppSelector((state) => state.sidebar.isOpen)
     const dispatch = useAppDispatch()
+    const { user } = useAppSelector((state) => state.user)
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -59,19 +61,16 @@ export const Sidebar = () => {
     return (
         <aside
             className={cn(
-                `top-0 w-full max-w-80 pt-20 bg-white border-r-2 shrink-0 transition-all px-8 duration-300 h-screen z-50 fixed shadow-2xl lg:shadow`,
+                `top-0 w-full max-w-80 pt-20 bg-white border-r-2 shrink-0 transition-all px-8 duration-300 h-screen z-50 fixed shadow-2xl lg:shadow-none`,
                 pathname.includes('auth') && 'hidden',
                 isOpen ? 'translate-x-0' : '-translate-x-full hidden',
             )}
         >
             <div className="bg-[#D4D4D4] h-[3px] w-full" />
             <div className="pt-7 flex flex-col gap-5">
-                <div className="border border-[#C0C0C0] gap-1.5 bg-[#F8F7F7] rounded-sm p-2 flex">
+                <div className="border border-[#C0C0C0] gap-1.5 bg-[#F8F7F7] rounded-sm p-2 flex items-center">
                     <div className="bg-[#C4C4C4] rounded size-11" />
-                    <div>
-                        <h2 className="font-bold">AO &quot;Халык Банк&quot;</h2>
-                        <p className="text-sm">{t('sidebar.team')} 250 {t('sidebar.employees')}</p>
-                    </div>
+                    <h2 className="font-bold text-xl">{user?.company.name}</h2>
                 </div>
 
                 <div>
@@ -116,12 +115,13 @@ const colorOptions = [
 ]
 
 export const Departments = () => {
-    const [departments, setDepartments] = useState<{id?: number, name: string, color: string}[]>([])
+    const [departments, setDepartments] = useState<{ id?: number, name: string, color: string }[]>([])
     const [newDepartment, setNewDepartment] = useState('')
     const [selectedColor, setSelectedColor] = useState(colorOptions[0].value)
     const [showDropdown, setShowDropdown] = useState(false)
     const [isAdding, setIsAdding] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const { user } = useAppSelector((state) => state.user)
     const addMenuRef = useRef<HTMLFormElement | null>(null)
     const { t } = useTranslation()
 
@@ -137,6 +137,7 @@ export const Departments = () => {
                 setIsLoading(false)
             }
         }
+
         fetchDepartments()
     }, [])
 
@@ -148,7 +149,7 @@ export const Departments = () => {
             setIsLoading(true)
             const response = await $api.post('departments/', {
                 name: newDepartment,
-                color: selectedColor
+                color: selectedColor,
             })
 
             setDepartments([...departments, response.data])
@@ -157,18 +158,6 @@ export const Departments = () => {
             setIsAdding(false)
         } catch (error) {
             console.error('Error adding department:', error)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
-    const removeDepartment = async (id: number) => {
-        try {
-            setIsLoading(true)
-            await $api.delete(`departments/${id}`)
-            setDepartments(departments.filter(dept => dept.id !== id))
-        } catch (error) {
-            console.error('Error removing department:', error)
         } finally {
             setIsLoading(false)
         }
@@ -204,6 +193,12 @@ export const Departments = () => {
         setSelectedColor(color)
         setShowDropdown(false)
     }
+
+
+    if (!user?.is_owner) {
+        return null
+    }
+
 
     return (
         <div className="max-w-sm h-64 overflow-scroll">
@@ -241,7 +236,8 @@ export const Departments = () => {
                             />
                         </div>
                         {showDropdown && (
-                            <div className="border border-[#A3A2A2] rounded-b p-2.5 flex flex-col gap-2 absolute bg-white border-t-0 top-[35px] shadow-md">
+                            <div
+                                className="border border-[#A3A2A2] rounded-b p-2.5 flex flex-col gap-2 absolute bg-white border-t-0 top-[35px] shadow-md">
                                 {colorOptions.map((option, index) => (
                                     <div
                                         className="size-5 rounded cursor-pointer"
@@ -276,23 +272,19 @@ export const Departments = () => {
             )}
 
             <div className="mt-4 space-y-3">
-                {departments.map((dept) => (
+                {departments?.map((dept) => (
                     <div key={dept.id} className="flex items-center gap-3 group">
                         <div
                             className="w-5 h-5 rounded bg-gray-300"
                             style={{ backgroundColor: dept.color }}
                         />
                         <p className="text-gray-600 flex-1">{dept.name}</p>
-                        <button
-                            onClick={() => dept.id && removeDepartment(dept.id)}
-                            className="p-1 rounded-full hover:bg-gray-200"
-                            disabled={isLoading}
-                        >
-                            <X className="hidden group-hover:block" size={16} />
-                        </button>
                     </div>
                 ))}
+                <Link href="/departments" className="text-stone-500">Manage departments</Link>
             </div>
+
+
         </div>
     )
 }

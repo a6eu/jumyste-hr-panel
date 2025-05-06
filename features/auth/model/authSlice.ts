@@ -30,7 +30,7 @@ export const register = createAsyncThunk(
         { rejectWithValue },
     ) => {
         try {
-            const response = await $api.post('auth/register', {
+            const response = await $api.post('auth/register-hr', {
                 first_name,
                 last_name,
                 email,

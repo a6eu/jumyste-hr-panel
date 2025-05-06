@@ -15,7 +15,7 @@ interface SelectProps {
     options: OptionType[]
     placeholder: string
     onChangeAction: (option: string | string[]) => void
-    defaultValue?: string
+    defaultValue?: string | string []
     value?: string | string[]
     isMulti?: boolean
 }

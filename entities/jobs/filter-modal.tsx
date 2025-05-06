@@ -1,12 +1,13 @@
 'use client'
 
-import { Input, Label, Radio, Select } from '@/shared/ui'
+import { Input, Label, Select } from '@/shared/ui'
 import { useTranslation } from 'react-i18next'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Types } from '@/entities/jobs/model/types'
 import { RotateCcw, X } from 'lucide-react'
 import { Dialog } from '@headlessui/react'
+import { skillsOptions } from '@/entities/jobs/job-create-form'
 
 export const FilterModal = ({
                                 isOpen,
@@ -20,6 +21,8 @@ export const FilterModal = ({
     const pathname = usePathname()
     const searchParams = useSearchParams()
     const [aiMatch, setAiMatch] = useState('')
+    const [city, setCity] = useState<string[]>([])
+    const [skills, setSkills] = useState<string[]>([])
 
     const cities = [
         { value: 'Almaty' },
@@ -30,7 +33,6 @@ export const FilterModal = ({
         { value: 'Bishkek' },
     ]
 
-    // Initialize state from URL params when modal opens
     useEffect(() => {
         if (isOpen) {
             setAiMatch(searchParams.get('ai_match') || '')
@@ -59,6 +61,12 @@ export const FilterModal = ({
     }
 
     const applyFilters = () => {
+        const params = new URLSearchParams(searchParams.toString())
+
+        if (aiMatch) params.set('ai_match', aiMatch)
+        else params.delete('ai_match')
+
+        router.push(`${pathname}?${params.toString()}`, { scroll: false })
         setIsOpen(false)
     }
 
@@ -66,10 +74,9 @@ export const FilterModal = ({
         <Dialog
             open={isOpen}
             onClose={() => setIsOpen(false)}
-            className="relative z-50"
+            className="relative z-[100]"
         >
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-
             <div className="fixed inset-0 flex items-center justify-center p-4">
                 <Dialog.Panel className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6">
                     <div className="flex justify-between items-center">
@@ -102,60 +109,28 @@ export const FilterModal = ({
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="location">Локация</Label>
+                            <Label htmlFor="city">Локация</Label>
                             <Select
-                                defaultValue={searchParams.get('location') || ''}
+                                isMulti
+                                value={city}
+                                defaultValue={searchParams.getAll('city') || ''}
                                 placeholder="Выберите город"
                                 options={cities}
-                                onChangeAction={(option) => updateSearchParams('location', option as string)}
+                                onChangeAction={(option) => {
+                                    setCity((prev) => [...prev, option as string])
+                                    updateSearchParams('city', option as string)
+                                }}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>{t('jobForm.jobType.title')}</Label>
-                            <div className="flex flex-col gap-2">
-                                {(t('jobForm.jobType.array', { returnObjects: true }) as Types[]).map((type) => (
-                                    <Radio
-                                        key={type.value}
-                                        name="employment_type"
-                                        value={type.value}
-                                        label={type.label}
-                                        selected={searchParams.get('employment_type') === type.value}
-                                        onChange={() => updateSearchParams('employment_type', type.value)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        <div className="space-y-2">
-                            <Label>{t('jobForm.workFormat.title')}</Label>
-                            <div className="flex flex-col gap-2">
-                                {(t('jobForm.workFormat.array', { returnObjects: true }) as Types[]).map((type) => (
-                                    <Radio
-                                        key={type.value}
-                                        name="work_format"
-                                        value={type.value}
-                                        label={type.label}
-                                        selected={searchParams.get('work_format') === type.value}
-                                        onChange={() => updateSearchParams('work_format', type.value)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <Label htmlFor="show">
-                                Показать вакансии
-                            </Label>
-                            <div className="flex flex-col gap-2">
-                                {['Все', 'Открытые вакансии', 'Закрытые вакансии'].map((type) => (
-                                    <Radio
-                                        key={type}
-                                        name="show"
-                                        value={type}
-                                        label={type}
-                                        selected={searchParams.get('show') === type}
-                                        onChange={() => updateSearchParams('show', type)}
-                                    />
-                                ))}
-                            </div>
+                            <Label htmlFor="location">Skills</Label>
+                            <Select
+                                isMulti
+                                value={skills}
+                                placeholder="Выберите город"
+                                options={skillsOptions}
+                                onChangeAction={(option) => updateSearchParams('location', option as string)}
+                            />
                         </div>
                     </div>
 

@@ -13,14 +13,14 @@ import { cn } from '@/shared/utils'
 const ProfilePage = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const { user, loading } = useAppSelector((state) => state.user)
+    const { user, loading, error } = useAppSelector((state) => state.user)
     const { isOpen } = useAppSelector((state) => state.sidebar)
 
     useEffect(() => {
         dispatch(getUser()).then(r => console.log(r))
     }, [])
 
-    if (!user && !loading) {
+    if (error) {
         return (
             <div className="flex justify-center text-3xl py-9 px-10 text-red-500 font-medium">
                 {t('errors.loadingError')}
@@ -31,7 +31,9 @@ const ProfilePage = () => {
     return (
         <div
             className={cn('w-full py-8 px-4 lg:px-16 gap-9 grid grid-cols-1 lg:gap-8 border-t-[3px]',
-                isOpen ? 'max-h-[calc(100svh-80px)] lg:max-h-max overflow-hidden lg:grid-cols-[1.1fr,1fr]' : "lg:grid-cols-[2fr,1fr]")}
+                isOpen
+                    ? 'max-h-[calc(100svh-80px)] lg:max-h-max overflow-hidden lg:grid-cols-[1.1fr,1fr]'
+                    : 'lg:grid-cols-[2fr,1fr]')}
         >
             <div className="flex flex-col w-full gap-5 lg:gap-9">
                 <UserHeader loading={loading} />

@@ -1,22 +1,32 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { JobsListItem } from '@/entities/jobs/jobs-list-item'
 import { useTranslation } from 'react-i18next'
-import { Dispatch, SetStateAction, useEffect } from 'react'
-import { SearchInput } from '@/shared/ui'
+import { useEffect, useMemo, useState } from 'react'
+import { SearchInput, Select } from '@/shared/ui'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { getCompanyJobs } from '@/entities/jobs/model/jobsSlice'
 
-const JobList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>> }) => {
+const JobList = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const { jobs } = useAppSelector(state => state.jobs)
 
+    const [searchValue, setSearchValue] = useState('')
+    const [statusFilter, setStatusFilter] = useState<string | null>(null)
+
     useEffect(() => {
         dispatch(getCompanyJobs())
     }, [dispatch])
+
+    const filteredJobs = useMemo(() => {
+        return jobs?.filter(job => {
+            const matchesSearch = job.title.toLowerCase().includes(searchValue.toLowerCase())
+            const matchesStatus = !statusFilter || job.status === statusFilter
+            return matchesSearch && matchesStatus
+        })
+    }, [jobs, searchValue, statusFilter])
 
     return (
         <>
@@ -29,18 +39,25 @@ const JobList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>> }
                     {t('jobPage.createButton')}
                 </Link>
             </div>
-            <div className="flex items-stretch mt-6 md:px-2.5">
-                <SearchInput placeholder={t('jobPage.searchInput')} />
-                <button
-                    type="button"
-                    className="flex items-center justify-center border rounded-2xl ml-4 md:ml-8 size-16"
-                    onClick={() => setFilter(true)}
-                >
-                    <Image src="/svg/filter.svg" alt="Filter" width={22} height={24} />
-                </button>
+            <div className="flex items-stretch mt-6 md:px-2.5 gap-4">
+                <SearchInput
+                    placeholder={t('jobPage.searchInput')}
+                    onChange={e => setSearchValue(e.target.value)}
+                    value={searchValue}
+                />
+                <Select
+                    options={[
+                        { label: 'Все', value: '' },
+                        { label: 'Открытые', value: 'open' },
+                        { label: 'Закрытые', value: 'closed' },
+                    ]}
+                    value={statusFilter as string}
+                    placeholder="Показать"
+                    onChangeAction={value => setStatusFilter(value as string || null)}
+                />
             </div>
             <div className="mt-6 flex flex-col gap-5">
-                {jobs.length > 0 && jobs.map(job => (
+                {filteredJobs?.map(job => (
                     <JobsListItem key={job.id} job={job} />
                 ))}
             </div>

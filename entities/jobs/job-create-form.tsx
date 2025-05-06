@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
     description: Yup.string().required('Введите описание вакансии'),
 })
 
-const skillsOptions = [
+export const skillsOptions = [
     // Frontend
     { value: 'HTML', label: 'HTML' },
     { value: 'CSS', label: 'CSS' },
@@ -157,7 +157,6 @@ const JobCreateForm = () => {
     const experienceOptions = Array.isArray(experienceArray) ? experienceArray : []
 
     const generateDescription = async () => {
-        console.log('generateDescription clicked', formik.values)
         setIsGenerating(true)
         try {
             const response = await $api.post('vacancies/generate-description', {

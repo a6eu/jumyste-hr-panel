@@ -9,10 +9,10 @@ import { IResume } from '@/entities/resume/model/IResume'
 import { useSearchParams } from 'next/navigation'
 
 export const fetchResumes = async (params?: {
-    ai_match?: string;
-    skills?: string[];
-    city?: string;
-    position?: string;
+    ai_match: string | undefined;
+    skills: string[] | undefined;
+    city: string[] | undefined;
+    position: string | undefined
 }) => {
     try {
         const response = await $api.get('resume/candidates', {
@@ -20,20 +20,21 @@ export const fetchResumes = async (params?: {
                 ai_match: params?.ai_match,
                 skills: params?.skills,
                 city: params?.city,
-                position: params?.position
-            }
-        });
-        return response.data;
+                position: params?.position,
+            },
+        })
+        return response.data
     } catch (error) {
-        console.error('Error fetching resumes:', error);
-        return [];
+        console.error('Error fetching resumes:', error)
+        return []
     }
-};
+}
 
 const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>> }) => {
     const [resumes, setResumes] = useState<IResume[]>([])
     const [loading, setLoading] = useState(true)
     const searchParams = useSearchParams()
+    const [searchQuery, setSearchQuery] = useState('')
 
     useEffect(() => {
         const loadResumes = async () => {
@@ -41,20 +42,29 @@ const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>
 
             const ai_match = searchParams.get('ai_match') || undefined
             const skills = searchParams.getAll('skills') || undefined
-            const city = searchParams.get('city') || undefined
+            const city = searchParams.getAll('city') || undefined
             const position = searchParams.get('position') || undefined
 
             const data = await fetchResumes({
                 ai_match,
                 skills,
                 city,
-                position
+                position,
             })
             setResumes(data)
             setLoading(false)
         }
         loadResumes()
     }, [searchParams])
+
+    const filteredResumes = resumes?.filter(resume => {
+        const name = resume.resume.full_name.toLowerCase()
+        const position = resume.resume.desired_position.toLowerCase()
+        return (
+            name.includes(searchQuery.toLowerCase()) ||
+            position.includes(searchQuery.toLowerCase())
+        )
+    })
 
     if (loading) {
         return <div>Loading...</div>
@@ -63,7 +73,13 @@ const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>
     return (
         <>
             <div className="flex items-stretch mt-6 md:px-2.5">
-                <SearchInput placeholder="Поиск по кандидатам" />
+                <SearchInput
+                    value={searchQuery}
+                    onChange={
+                        (e) =>
+                            setSearchQuery(e.target.value)
+                    }
+                    placeholder="Поиск по кандидатам" />
                 <button
                     type="button"
                     className="flex items-center justify-center border rounded-2xl ml-4 md:ml-8 size-16"
@@ -72,7 +88,7 @@ const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>
                 </button>
             </div>
             <div className="mt-6 space-y-4">
-                {resumes.map(resume => (
+                {filteredResumes?.map(resume => (
                     <ResumeListItem key={resume.id} resume={resume} />
                 ))}
             </div>
