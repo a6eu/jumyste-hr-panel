@@ -47,9 +47,9 @@ export const MessagePreview: React.FC<IMessagePreviewProps> = ({ chat }) => {
                 </p>
             </div>
 
-            <div className="flex flex-col items-end text-xs text-gray-500">
+            <div className="flex flex-col items-start text-xs text-gray-500">
                 <span className="leading-6 whitespace-nowrap">06:12 PM</span>
-                <button className="text-red-500 hover:text-red-700">X</button>
+
             </div>
         </div>
     )

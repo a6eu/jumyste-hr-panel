@@ -7,40 +7,36 @@ import { useState } from 'react'
 import { cn, formatDateRelative, formatNumber } from '@/shared/utils'
 import { IJob } from '@/types/job'
 import Link from 'next/link'
+import { useAppSelector } from '@/shared/hooks'
 
 export const JobsListItem = ({ job }: { job: IJob }) => {
     const [showDescription, setShowDescription] = useState(false)
+    const { user } = useAppSelector(state => state.user)
 
     return (
         <div className={cn(
             'flex flex-col rounded-2xl p-5 md:p-8 lg:p-10 border w-full relative',
-            job.status === 'closed' && "bg-gray-50 opacity-80"
+            job.status === 'closed' && 'bg-gray-50 opacity-80',
         )}>
-            {/* Closed status ribbon */}
             {job.status === 'closed' && (
-                <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-md shadow-md z-10">
+                <div
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-md shadow-md z-10">
                     Закрыта
                 </div>
             )}
 
             <div className="flex flex-col md:flex-row justify-between items-start gap-4 md:gap-0">
                 <div className="flex items-center gap-4 md:gap-6">
-                    <div className="flex items-center justify-center size-16 md:size-20 rounded-full bg-white">
-                        <div className="relative w-12 md:w-16 lg:w-20 min-w-12 max-w-20 h-auto aspect-square">
-                            <Image
-                                src="/svg/halyk.svg"
-                                alt="Halyk Logo"
-                                fill
-                                className="object-contain"
-                            />
-                        </div>
-                    </div>
+                    {/*<div className="flex items-center justify-center size-16 md:size-20 rounded-full bg-white">*/}
+                    {/*    <div className="relative w-12 md:w-16 lg:w-20 min-w-12 max-w-20 h-auto aspect-square bg-primaryBlocks">*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div>
                         <div className="flex flex-wrap items-center gap-2 md:gap-3">
                             <h3 className="font-medium text-lg md:text-xl p-0 md:text-nowrap">{job.title}</h3>
                         </div>
                         <h3 className="font-medium text-lg md:text-xl">от {formatNumber(job.salary_min, 'kz')}</h3>
-                        <p className="text-sm mt-2.5">АО &quot;Халык Банк&quot;</p>
+                        <p className="text-sm mt-2.5">{user?.company.name}</p>
                     </div>
                 </div>
 

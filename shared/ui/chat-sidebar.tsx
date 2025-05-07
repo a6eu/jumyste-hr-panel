@@ -10,13 +10,9 @@ export const ChatSidebar = () => {
     const dispatch = useAppDispatch()
     const { chats, loading, error } = useAppSelector(state => state.chats)
 
-    console.log(chats)
-
     useEffect(() => {
         dispatch(getUserChatsThunk())
     }, [dispatch])
-
-    console.log(chats)
 
     return (
         <div className="flex flex-col gap-2 h-full">

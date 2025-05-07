@@ -5,6 +5,7 @@ import SignIn from '@/features/auth/sign-in'
 import SignUp from '@/features/auth/sign-up'
 import LanguageSwitcher from '@/shared/ui/language-switcher'
 import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 const AuthPageContent = () => {
     const searchParams = useSearchParams()
@@ -18,7 +19,7 @@ const AuthPageContent = () => {
             <div
                 className="flex justify-center lg:flex-row lg:justify-between items-center h-screen px-8 max-w-7xl w-full mx-auto py-16 gap-10 md:gap-24">
                 <div className="max-w-[50vw] md:h-full w-full md:flex-1 rounded-3xl hidden lg:flex relative">
-                    <img className="size-[870px] object-contain" src={isRegistered ? "/images/welcome-back.png" : "/images/registration.png"} alt="" />
+                    <Image width={1000} height={1000} className="size-[870px] object-contain" src={isRegistered ? "/images/welcome-back.png" : "/images/registration.png"} alt="" />
                 </div>
                 <div className="w-full max-w-md flex justify-center">
                     {isRegistered ? <SignIn /> : <SignUp />}
