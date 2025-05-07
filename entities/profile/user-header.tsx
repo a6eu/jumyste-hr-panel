@@ -2,9 +2,11 @@
 
 import { Skeleton } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '@/shared/hooks'
 
 const UserHeader = ({ loading }: { loading: boolean }) => {
     const {t} = useTranslation()
+    const {user} = useAppSelector(state => state.user)
 
     return (
         <div className="flex flex-wrap items-center gap-7 px-4 sm:px-0">
@@ -47,11 +49,8 @@ const UserHeader = ({ loading }: { loading: boolean }) => {
                         ) : (
                             <>
                                 <span className="text-xl">
-                                    АО &quot;Халык Банк&quot;
+                                    {user?.company.name}
                                 </span>
-                                <p className="text-black/50">
-                                    250 {t('profile.employees')}
-                                </p>
                             </>
                         )}
                     </div>

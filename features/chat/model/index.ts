@@ -13,6 +13,7 @@ export interface IMessage {
     sender_id: number,
     id: number
     content: string
+    file_data: string
     read_by: number
     created_at: string
 }
