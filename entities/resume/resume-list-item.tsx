@@ -4,8 +4,11 @@ import Image from 'next/image'
 import { BriefcaseBusiness, Clock4, MapPinned } from 'lucide-react'
 import { IResume } from '@/entities/resume/model/IResume'
 import { formatDateRelative } from '@/shared/utils'
+import { useState } from 'react'
+import { ResumeModal } from '@/shared/ui/kanban'
 
 export const ResumeListItem = ({ resume }: { resume: IResume }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     return (
         <div className="flex flex-col rounded-2xl p-5 md:px-10 border w-full">
             <div className="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -26,9 +29,13 @@ export const ResumeListItem = ({ resume }: { resume: IResume }) => {
                             </h2>
                             <div className="flex w gap-2 w-full sm:w-auto">
                                 <button
+                                    onClick={() => setIsModalOpen(true)}
                                     className="bg-primaryBlocks h-9 font-medium text-sm rounded-lg text-white w-full sm:w-auto px-4">
                                     Посмотреть детали
                                 </button>
+                                {isModalOpen && (
+                                    <ResumeModal setIsModalOpen={setIsModalOpen} candidate={resume} />
+                                )}
                             </div>
                         </div>
                         <div
@@ -72,7 +79,8 @@ export const ResumeListItem = ({ resume }: { resume: IResume }) => {
                     <div className="flex flex-wrap gap-2">
                         {resume.resume.skills.length > 0 ? (
                             resume.resume.skills.map((item, index) => (
-                                <span key={index} className="text-primary bg-primaryBlocks/30 py-1 px-2.5 rounded-2xl text-sm">
+                                <span key={index}
+                                      className="text-primary bg-primaryBlocks/30 py-1 px-2.5 rounded-2xl text-sm">
                                     {item}
                                 </span>
                             ))

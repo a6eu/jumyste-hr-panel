@@ -55,7 +55,7 @@ export const CandidateCard = ({ candidate }: { candidate: ICandidate }) => {
     )
 }
 
-const ResumeModal = ({ setIsModalOpen, candidate }: {
+export const ResumeModal = ({ setIsModalOpen, candidate }: {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
     candidate: any
 }) => {

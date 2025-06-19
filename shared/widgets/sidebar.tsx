@@ -30,12 +30,6 @@ const menuLinks = [
         icon: <UserPlus />,
         path: '/recruiting',
     },
-    {
-        key: 'schedule',
-        label: 'sidebar.mainMenu.schedule',
-        icon: <CalendarDays />,
-        path: '/schedule',
-    },
 ]
 
 export const Sidebar = () => {

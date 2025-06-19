@@ -168,10 +168,10 @@
     "submit": "Опубликовать вакансию",
     "backButton": "Назад"
   },
-  "jobsPage": {
+  "jobPage": {
     "title": "Список вакансий",
     "createButton": "Создать вакансию",
-    "search": "Поиск по вакансиям",
+    "searchInput": "Поиск по вакансиям",
     "loadMore": "Загрузить еще",
     "job": {
       "seeDetails": "Посмотреть детали",

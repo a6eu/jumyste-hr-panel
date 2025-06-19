@@ -68,15 +68,6 @@ const Header = () => {
 
                     <div className="ml-auto">
                         <div className="hidden sm:flex gap-5 items-center">
-                            <div
-                                className="flex items-center cursor-pointer justify-center bg-[#F3F3F3] size-11 rounded-full">
-                                <Image
-                                    src="/svg/bell.svg"
-                                    height={20}
-                                    width={16}
-                                    alt=""
-                                />
-                            </div>
                             {user?.profile_picture ? (
                                 <Image
                                     width={56}

@@ -131,5 +131,18 @@
     "jobDescription": "Laýazymdyq sippattaması",
     "submit": "Jumysty tapsyrý",
     "backButton": "Artqa"
+  },
+  "jobPage": {
+    "title": "Vakansia tizimi",
+    "createButton": "Vakansia qury",
+    "searchInput": "Izdey",
+    "loadMore": "Tag'i juktey",
+    "job": {
+      "seeDetails": "Посмотреть детали",
+      "edit": "Редактировать",
+      "keySkills": "Ключевые навыки",
+      "uploaded": "Опубликовано",
+      "response": "откликов"
+    }
   }
 }
