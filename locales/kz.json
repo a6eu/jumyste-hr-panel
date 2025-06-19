@@ -132,6 +132,12 @@
     "submit": "Jumysty tapsyrý",
     "backButton": "Artqa"
   },
+  "candidate": {
+    "about": "Kandidat tyrali",
+    "skills": "Zheke dagdilari",
+    "desc": "Men tyrali",
+    "watch": "Detaldar kory"
+  },
   "jobPage": {
     "title": "Vakansia tizimi",
     "createButton": "Vakansia qury",

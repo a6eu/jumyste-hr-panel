@@ -6,9 +6,13 @@ import { IResume } from '@/entities/resume/model/IResume'
 import { formatDateRelative } from '@/shared/utils'
 import { useState } from 'react'
 import { ResumeModal } from '@/shared/ui/kanban'
+import { useTranslation } from 'react-i18next'
 
 export const ResumeListItem = ({ resume }: { resume: IResume }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const { t } = useTranslation()
+
     return (
         <div className="flex flex-col rounded-2xl p-5 md:px-10 border w-full">
             <div className="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -31,7 +35,7 @@ export const ResumeListItem = ({ resume }: { resume: IResume }) => {
                                 <button
                                     onClick={() => setIsModalOpen(true)}
                                     className="bg-primaryBlocks h-9 font-medium text-sm rounded-lg text-white w-full sm:w-auto px-4">
-                                    Посмотреть детали
+                                    {t('candidate.watch')}
                                 </button>
                                 {isModalOpen && (
                                     <ResumeModal setIsModalOpen={setIsModalOpen} candidate={resume} />

@@ -30,7 +30,6 @@
     "loadingError": "An error occurred while loading this page",
     "unexpected": "An unexpected error occurred! Please try again later"
   },
-
   "loading": "Loading...",
   "register": {
     "welcome": "Close vacancies faster!",
@@ -92,28 +91,64 @@
     "jobType": {
       "title": "Employment type",
       "array": [
-        { "label": "Full time", "value": "Full time" },
-        { "label": "Half time", "value": "Half time" },
-        { "label": "Freelance", "value": "Freelance" },
-        { "label": "Internship", "value": "Internship" }
+        {
+          "label": "Full time",
+          "value": "Full time"
+        },
+        {
+          "label": "Half time",
+          "value": "Half time"
+        },
+        {
+          "label": "Freelance",
+          "value": "Freelance"
+        },
+        {
+          "label": "Internship",
+          "value": "Internship"
+        }
       ]
     },
     "workFormat": {
       "title": "Work format",
       "array": [
-        { "label": "Office", "value": "Office" },
-        { "label": "Remote", "value": "Remote" },
-        { "label": "Hybrid", "value": "Hybrid" }
+        {
+          "label": "Office",
+          "value": "Office"
+        },
+        {
+          "label": "Remote",
+          "value": "Remote"
+        },
+        {
+          "label": "Hybrid",
+          "value": "Hybrid"
+        }
       ]
     },
     "experience": {
       "title": "Experience",
       "array": [
-        { "label": "No experience", "value": "No experience" },
-        { "label": "1-3 years", "value": "1-3 years" },
-        { "label": "3-5 years", "value": "3-5 years" },
-        { "label": "5-7 years", "value": "5-7 years" },
-        { "label": "7+ years", "value": "7+ years" }
+        {
+          "label": "No experience",
+          "value": "No experience"
+        },
+        {
+          "label": "1-3 years",
+          "value": "1-3 years"
+        },
+        {
+          "label": "3-5 years",
+          "value": "3-5 years"
+        },
+        {
+          "label": "5-7 years",
+          "value": "5-7 years"
+        },
+        {
+          "label": "7+ years",
+          "value": "7+ years"
+        }
       ]
     },
     "salary": {
@@ -134,7 +169,13 @@
   },
   "jobPage": {
     "title": "Jobs list",
-    "searchInput": "Search jobs",
+    "searchInput": "Search",
     "createButton": "Create job"
+  },
+  "candidate": {
+    "about": "Candidate description",
+    "skills": "Personal skills",
+    "desc": "About me",
+    "watch": "See details"
   }
 }

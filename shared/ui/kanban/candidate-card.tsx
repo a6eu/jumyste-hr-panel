@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { ICandidate, ICandidateDetails } from '@/types/user'
 import { UserIcon, XIcon } from 'lucide-react'
 import { Button } from '@/shared/ui'
+import { useTranslation } from 'react-i18next'
 
 export const CandidateCard = ({ candidate }: { candidate: ICandidate }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -59,13 +60,14 @@ export const ResumeModal = ({ setIsModalOpen, candidate }: {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
     candidate: any
 }) => {
+    const { t } = useTranslation()
     return (
         <div className="fixed inset-0 z-[100] bg-black/40 flex justify-center items-center p-4">
             <div className="w-full max-w-2xl bg-white rounded-2xl overflow-hidden shadow-xl">
                 <div className="p-6 flex justify-between items-center border-b">
                     <div className="flex items-center gap-3">
                         <UserIcon className="text-primaryBlocks" size={24} />
-                        <h2 className="text-xl font-semibold">Описание кандидата</h2>
+                        <h2 className="text-xl font-semibold">{t('candidate.about')}</h2>
                     </div>
                     <button
                         onClick={() => setIsModalOpen(false)}
@@ -110,7 +112,7 @@ export const ResumeModal = ({ setIsModalOpen, candidate }: {
 
                     <div className="rounded-lg p-4 border border-stone-300">
                         <h3 className="text-lg font-semibold mb-4">
-                            О себе
+                            {t('candidate.desc')}
                         </h3>
                         <p className="text-gray-700">
                             {candidate.resume.about}
@@ -118,7 +120,7 @@ export const ResumeModal = ({ setIsModalOpen, candidate }: {
                     </div>
 
                     <div className="mb-8 p-4 border border-stone-300 rounded-lg mt-5">
-                        <h3 className="text-lg font-semibold mb-4">Профессиональные навыки</h3>
+                        <h3 className="text-lg font-semibold mb-4">{t('candidate.skills')}</h3>
                         <div className="flex flex-wrap gap-2">
                             {candidate.resume.skills.map((skill: string, index: number) => (
                                 <span

@@ -7,6 +7,7 @@ import { SearchInput } from '@/shared/ui'
 import $api from '@/http/setup'
 import { IResume } from '@/entities/resume/model/IResume'
 import { useSearchParams } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 
 export const fetchResumes = async (params?: {
     ai_match: string | undefined;
@@ -35,6 +36,7 @@ const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>
     const [loading, setLoading] = useState(true)
     const searchParams = useSearchParams()
     const [searchQuery, setSearchQuery] = useState('')
+    const { t } = useTranslation()
 
     useEffect(() => {
         const loadResumes = async () => {
@@ -79,7 +81,7 @@ const ResumeList = ({ setFilter }: { setFilter: Dispatch<SetStateAction<boolean>
                         (e) =>
                             setSearchQuery(e.target.value)
                     }
-                    placeholder="Поиск по кандидатам" />
+                    placeholder={t('jobPage.searchInput')} />
                 <button
                     type="button"
                     className="flex items-center justify-center border rounded-2xl ml-4 md:ml-8 size-16"
